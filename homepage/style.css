@@ -1,0 +1,57 @@
+html{
+    position: relative;
+    display: grid;
+    align-items:center ;
+    justify-content: center center;
+    
+}
+body{
+    position: relative;
+    display: grid;
+    align-items:center ;
+    justify-content: center center;
+    background-color:rgba(160, 221, 103, 0.678);
+}
+.register_form{
+    position:relative;
+    display:grid;
+    align-items:center;
+    justify-content: center;
+    margin:0 auto;
+    top:0;
+    bottom:0;
+    background-color:rgba(101, 175, 194, 0.301);
+    height:35em;
+    width: initial, 20em;
+}
+.header h1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 auto;
+    top:0;
+    bottom:0;
+    width:5em;
+    height:inherit;
+}
+.register_form_inputs{
+    position: absolute;
+}
+.inputs{
+    display:grid;
+    align-items:center;
+    justify-content: center;
+    padding:5px;
+}
+.register_button{
+    position:relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 auto;
+    top:-1em;
+    bottom:0;
+    width:5em;
+    height:2em;
+}
