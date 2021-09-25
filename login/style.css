@@ -19,8 +19,8 @@ body{
     justify-content: center center;
     margin: auto;
     top:100%;
-    bottom:0;
-    background-color:rgba(101, 175, 194, 0.301);
+    background-color:rgba(114, 198, 219, 0.199);
+    border-radius: 10px;
     height:15em;
     width: initial, 20em;
 }
@@ -51,7 +51,26 @@ body{
     justify-content: center;
     margin:0 auto;
     top:-1em;
-    bottom:0;
+    right:2em;
     width:5em;
     height:2em;
+}
+.button{
+    border:1px solid transparent;
+    border-radius: 10px;
+}
+.register_form{
+    position:relative;
+    display:grid;
+    align-items:center;
+    justify-content: center center;
+    margin: auto;
+    top:186px;
+    left:35px;
+    height:initial;
+    width: initial;
+}
+.button_register{
+    border:1px solid transparent;
+    border-radius: 10px;
 }

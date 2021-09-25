@@ -7,8 +7,8 @@ const validationPassword = document.getElementById('validation_password');
 const email = document.getElementById('email');
 const validationEmail = document.getElementById('validation_email');
 
-document.getElementById('register_form_button').onclick = regiser = () => {
-
+registerForm.addEventListener('submit', regiser = (e) => {
+    
     const firstname = firstName.value
     const lastname = lastName.value
     const Username = username.value
@@ -64,9 +64,10 @@ document.getElementById('register_form_button').onclick = regiser = () => {
     } else if ( Email !== ValidationEmail ) {
 
     } else {
-        fetch
+        
     }
-}
+    e.preventDefault();
+})
 
 function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);

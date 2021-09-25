@@ -8,27 +8,27 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="login_form" id="loginForm">
+    <form class="login_form" id="loginForm" method="GET" action="/">
         <div class="header">
             <h1>login</h1>
         </div>
         <div class=login_form_inputs">
             <div class="inputs">
-                <small>Email</small>
-                <input class="login_input" type="text" placeholder="Enter your Email">
+                <label for="email">Email</label>
+                <input id="email" class="login_input" name="email" type="text" placeholder="Enter your Email">
             </div>
             <div class="inputs">
-                <small>password</small>
-                <input class="login_input" type="text" placeholder="Enter your password">
+                <label for="password">password</label>
+                <input id="password" class="login_input" name="password" type="text" placeholder="Enter your password">
             </div>
         </div>
         <div class="login_button">
             <button id="login_form_button" class="button">Login</button>
         </div>
-        <div class="register_button">
-            <button onclick=href class="button">register</button>
-        </div>
     </form>
+        <form class="register_form" id="register" action="/register" method="GET">
+            <button id="register_btn" type="submit" id="register" class="button_register">Register</button>
+        </form>
 </body>
     
 </body>

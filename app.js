@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const register = require('./api/register');
+const register = require('./api/registerRouter');
 const app = express();
 
 //body parser Midware

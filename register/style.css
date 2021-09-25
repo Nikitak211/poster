@@ -54,4 +54,6 @@ body{
     bottom:0;
     width:5em;
     height:2em;
+    border:1px solid transparent;
+    border-radius: 10px;
 }
