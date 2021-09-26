@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/static/login', express.static(path.join(__dirname, 'login')))
 app.use('/static/register', express.static(path.join(__dirname, 'register')))
 app.use('/static/users', express.static(path.join(__dirname, 'homepage')))
+app.use('/static/svg', express.static(path.join(__dirname, 'svg')))
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname,'login/login.html'))
