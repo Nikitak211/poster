@@ -12,8 +12,8 @@ body{
 }
 header{
     position: relative;
-    padding-top: 6px;
-    padding-bottom: 3px;
+    padding-top: 0.5em;
+    padding-bottom: 0.15em;
     background-color:rgba(245, 245, 220, 0.548);
     box-shadow: 0 0 3px #000;
     width: 100%;
@@ -22,63 +22,66 @@ header{
 }
 header li {
     display: inline;
-    padding-left:45px;
+    align-items:center;
+    justify-content: center;
+    padding-left:6em;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 header li a {
+    display: inline;
+    position: absolute;
+    align-items:center;
+    justify-content: center;
+    margin:auto;
+    margin-left: -6.5em;
     color: rgb(0, 0, 0);
     text-decoration: none;
-    padding:15px;
+
 }
 header li a:hover {
     color:#71DBD4;
 }
-header ul #notification a svg  {
+header img.logo {
+    width:7em;
+    height:7em;
     border-radius: 25px; 
     float: right;
-    position: relative;
-
+    position: absolute;
     transition: .3s ease;
-    right:4em;
+    right:2em;
+    top:-1.5em;
+    filter: invert(43%) sepia(32%) saturate(55546%) hue-rotate(243deg) brightness(98%) contrast(53%);
 }
 
-.svg-icon {
-    width: 2em;
-    height: 2em;
-  }
-  
-.svg-icon path,
-.svg-icon polygon,
-.svg-icon rect {
-    fill: #4691f6;
-  }
-  
-.svg-icon circle {
-    stroke: #4691f6;
-    stroke-width: 1;
-  }
 header ul #head {
-    position: relative;
-    left: -10%;
+    position: absolute;
+    left: 0%;
 }
 .active{
-    color:#71DBD4;
+    color:#5cb6b0;
+}
+form{
+    display: block;
+    height:35em;
+    width: 20em;
 }
 .register_form{
     position: relative;
-    display:grid;
-    align-items:center;
-    justify-content: grid ;
+    display:block;
+    align-items:center ;
+    justify-content: center center ;
     margin:0 auto;
-    top:20%;
-    left:0;
+    margin-top:5%;
+    left:2.5em;
     background-color:rgba(109, 214, 240, 0.473);
     height:35em;
     width: 20em;
     border-radius: 10px;
 }
 .header_name{
-    display:relative;
+    position: absolute;
+    margin:0 auto;
+    margin-left: 4em;
     font-size:20px;
 }
 .inputs{
@@ -100,10 +103,21 @@ label{
     align-items: center;
     justify-content: center;
     margin:0 auto;
-    top:-1em;
+    margin-top:2.5em;
     bottom:0;
     width:5em;
     height:2em;
     border:1px solid transparent;
     border-radius: 10px;
 }
+/* header li img.logo{
+    align-items: left;
+    justify-content:left;
+    margin:0 auto;
+    margin-top:-2em;
+    margin-left: -15em;
+    padding:5px;
+    width:5em;
+    height:5em;
+    filter: opacity(1)  drop-shadow(.10em 0.10em 0.1em #086972) drop-shadow(-.25em -0.15em 0.1em #086972);
+} */
