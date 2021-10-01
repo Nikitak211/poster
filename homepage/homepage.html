@@ -21,7 +21,7 @@
         </ul>
     </header>
     <form class="post_form_container">
-        <div class="post-inpust">
+        <div class="post-inputs">
             <textarea placeholder="Write something on your post" id="post-body"></textarea>
         </div>
         <div class="post-btn">
@@ -30,15 +30,23 @@
     </form>
     <div class="btn_container">
         <div class="new-post">
+            <a href="#" ><label>👨🏻‍💻</label></a>
             <textarea readonly id="posted-post" class="posted-post">
                 this post is the best toast
             </textarea>
-            <li class="commented-comment"><small>this post is great</small></li>    
+            <li class="commented-comment">
+                <b></b>
+                <b></b>
+                <a href="#" >😄</a>
+                <label>user</label>
+                <small id="posted-post" type="textarea">this post is great</small>
+            </li>    
         </div>
-        <div class="post-inpust">
+        <div class="post-inputs comment">
             <ul>
             <li><button id="like-btn">Like</button></li>
             <li><button id="comment-btn">comment</button></li>
+            <textarea class="comment-textarea"></textarea>
         </ul>
         </div>
     </div>
