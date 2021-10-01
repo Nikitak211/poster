@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/homepage/style.css">
-    <title>Login</title>
+    <script src="/static/homepage/script.js"></script>
+    <title>Poster</title>
 </head>
 <body>
     <header>
@@ -19,22 +20,27 @@
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
-    <div class="btn_container">
-        <div class="post-inpust">
-            <ul>
-            <li><button id="like-btn">Like</button></li>
-            <li><button id="more-btn">More</button></li>
-        </ul>
-        </div>
-    </div>
-    <div class="post_container">
+    <form class="post_form_container">
         <div class="post-inpust">
             <textarea placeholder="Write something on your post" id="post-body"></textarea>
         </div>
         <div class="post-btn">
             <button id="post-btn">Post</button>
         </div>
-
+    </form>
+    <div class="btn_container">
+        <div class="new-post">
+            <textarea readonly id="posted-post" class="posted-post">
+                this post is the best toast
+            </textarea>
+            <li class="commented-comment"><small>this post is great</small></li>    
+        </div>
+        <div class="post-inpust">
+            <ul>
+            <li><button id="like-btn">Like</button></li>
+            <li><button id="comment-btn">comment</button></li>
+        </ul>
+        </div>
     </div>
 </body>
     

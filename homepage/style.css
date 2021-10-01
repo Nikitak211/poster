@@ -51,29 +51,6 @@ header img.logo {
     top:-1.5em;
     filter: invert(43%) sepia(32%) saturate(55546%) hue-rotate(243deg) brightness(98%) contrast(53%);
 }
-header ul #notification a svg  {
-    border-radius: 25px; 
-    position: relative;
-    margin: 0 auto;
-    margin-left:10em;
-    
-}
-
-.svg-icon {
-    width: 2em;
-    height: 2em;
-  }
-  
-.svg-icon path,
-.svg-icon polygon,
-.svg-icon rect {
-    fill: #4691f6;
-  }
-  
-.svg-icon circle {
-    stroke: #4691f6;
-    stroke-width: 1;
-  }
 header ul #head {
     position: absolute;
     left: 0;
@@ -132,7 +109,7 @@ label{
     border:1px solid transparent;
     border-radius: 10px;
 }
-.post_container{
+.post_form_container{
     background-color:#cecece;
     position: relative;
     display:grid;
@@ -144,16 +121,15 @@ label{
     height:10em;
 }
 .btn_container{
-    background-color:rgba(53, 53, 52, 0.89);
+    background-color:rgba(74, 182, 209, 0.89);
     position: relative;
     display:grid;
     align-items:center ;
     justify-content: center center ;
     margin:0 auto;
-    margin-top:0%;
+    margin-top:5em;
     width:50em;
-    height:3em;
-    z-index: -10;
+    height:20em;
 }
 .post-inpust li {
     display: inline;
@@ -164,7 +140,13 @@ label{
 }
 .btn_container .post-inpust ul{
     margin-left: -45em;
+    margin-top:13em;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.post-inpust ul button{
+    border:1px solid transparent;
+    border-radius: 5px;
+
 }
 #post-body{
     position: absolute;
@@ -187,7 +169,7 @@ label{
     position: absolute;
     margin:0 auto;
     margin-top:-8.3em;
-    margin-right:5em;
+    margin-right:3em;
     
 }
 #post-btn{
@@ -199,3 +181,36 @@ label{
 button{
     font-family:'Brush Script MT', cursive;
 }
+.new-post{
+    background-color:rgba(53, 53, 52, 0.89);
+    position: relative;
+    margin:0 auto;
+    width:50em;
+}
+.posted-post {
+    position: absolute;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;
+    overflow: hidden;
+    margin-top: -1.2em;
+    outline:0px none transparent;
+  }
+.posted-post {
+    display: block;
+    width: 49.64em;
+    height:5em;
+    min-height: 50px;
+    line-height: 20px;
+    
+    
+  }
+  .commented-comment{
+      background-color: #fff;
+      position: absolute;
+      width:10em;
+      height: 2em;
+      margin-top: 5em;
+      list-style-type: none;
+  }
