@@ -56,7 +56,9 @@ header ul #head {
     left: 0;
 }
 .active{
-    color:#5cb6b0;
+    position: absolute;
+    color:#6fe6de;
+    text-shadow: 1px 2px 2px #000;
 }
 form{
     display: block;

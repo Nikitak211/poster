@@ -32,7 +32,7 @@ header li a {
     align-items:center;
     justify-content: center;
     margin:auto;
-    margin-left: -6.5em;
+    margin-left: -6em;
     color: rgb(0, 0, 0);
     text-decoration: none;
 
@@ -47,7 +47,7 @@ header img.logo {
     float: right;
     position: absolute;
     transition: .3s ease;
-    right:2em;
+    right:0.95em;
     top:-1.5em;
     filter: invert(43%) sepia(32%) saturate(55546%) hue-rotate(243deg) brightness(98%) contrast(53%);
 }
@@ -79,7 +79,9 @@ header ul #head {
     left: 0;
 }
 .active{
-    color:#5cb6b0;
+    position: absolute;
+    color:#6fe6de;
+    text-shadow: 1px 2px 2px #000;
 }
 form{
     display: block;
@@ -131,12 +133,44 @@ label{
     border-radius: 10px;
 }
 .post_container{
-    background-color:#000;
+    background-color:#0b95a288;
     position: relative;
-    display:block;
+    display:grid;
     align-items:center ;
     justify-content: center center ;
     margin:0 auto;
     width:50em;
-    height:50em;
+    height:53.7em;
+}
+.post-input{
+    background-color:#000;
+    position:absolute;
+    margin:0 auto;
+    width:50em;
+    height:53.7em;
+}
+#post-title {
+    position: absolute;
+    margin:0 auto;
+    margin-top:-10em;
+    padding-top:5px;
+}
+textarea{
+    width:20em;
+    padding-bottom: 10em;
+    border:transparent;
+    border-radius: 10px;
+    font-size: 2em;
+}
+.post-btn{
+    position: absolute;
+    margin:0 auto;
+    margin-top:30em;
+    
+}
+#post-btn{
+    border:1px solid transparent;
+    border-radius:10px;
+    width:5em;
+    height:2em;
 }
