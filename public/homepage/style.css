@@ -121,7 +121,7 @@ label{
     height:10em;
 }
 .btn_container{
-    background-color:rgba(74, 182, 209, 0.89);
+    background-color:rgba(74, 182, 209, 0.959);
     position: relative;
     display:grid;
     align-items:center ;
@@ -183,10 +183,43 @@ button{
     z-index: 1;
 }
 .new-post{
-    background-color:rgba(53, 53, 52, 0.89);
-    position: relative;
+    background-color:rgba(53, 53, 52, 0.514);
+    position: absolute;
     margin:0 auto;
     width:50em;
+    margin-top:-14em;
+}
+.new-post textarea{
+    width:43.95em;
+}
+.author-post{
+    position: absolute;
+    background:linear-gradient(.25turn,white ,75%, rgba(74, 182, 209, 0.959));
+    font-size:20px;
+    margin-top: -2.4em;
+    font-family:'Brush Script MT', cursive;
+    height:2em;
+    width:10em;
+}
+.post-date{
+    position: absolute;
+    background:linear-gradient(.25turn,rgba(74, 182, 209, 0.959) ,45%,white );
+    font-size:16px;
+    padding-top: 5px;
+    margin-top: -3em;
+    right:0em;
+    height:3em;
+    width:10em;
+}
+.posted-post-title{
+    position: absolute;
+    font-size:20px;
+    margin-top: -2.4em;
+    right:0;
+    left:15em;
+    font-family:'Brush Script MT', cursive;
+    height:2em;
+    width:10em;
 }
 .posted-post {
     position: absolute;

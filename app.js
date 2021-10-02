@@ -7,22 +7,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/static/login', express.static(path.join(__dirname, 'login')))
-app.use('/static/register', express.static(path.join(__dirname, 'register')))
-app.use('/static/homepage', express.static(path.join(__dirname, 'homepage')))
-app.use('/static/svg', express.static(path.join(__dirname, 'svg')))
-app.use('/static/logo', express.static(path.join(__dirname, 'logo')))
-
+app.use('/static/public', express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname,'homepage/homepage.html'))
+    res.sendFile(path.resolve(__dirname,'public/homepage/homepage.html'))
 })
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.resolve(__dirname,'login/login.html'))
+    res.sendFile(path.resolve(__dirname,'public/login/login.html'))
 })
 app.get('/register', (req, res) => {
-    res.sendFile(path.resolve(__dirname,'register/register.html'))
+    res.sendFile(path.resolve(__dirname,'public/register/register.html'))
 })
 app.get('/api', register)
 
