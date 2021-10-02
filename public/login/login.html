@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/login/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <ul>
+            <label id="head" class="header_name">Login</label>
+            <li><img class="logo" src="/static/logo/poster-logos_transparent.png"></li>
+            <li><a href="#">posters</a></li>
+            <li><a href="#" class="active">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li id="notification"><a href="#"></a></li>
+        </ul>
+    </header>
+    <form class="login_form" id="loginForm" method="GET" action="/">
+        <div class="header">
+            <h1>login</h1>
+        </div>
+        <div class=login_form_inputs">
+            <div class="inputs">
+                <label for="email">Email</label>
+                <input id="email" class="login_input" name="email" type="text" placeholder="Enter your Email">
+            </div>
+            <div class="inputs">
+                <label for="password">password</label>
+                <input id="password" class="login_input" name="password" type="text" placeholder="Enter your password">
+            </div>
+        </div>
+        <div class="login_button">
+            <button id="login_form_button" class="button">Login</button>
+            <button id="register_btn" type="submit" id="register" class="button_register">Register</button>
+        </div>
+</body>
+    
+</body>
+</html>
