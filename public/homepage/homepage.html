@@ -15,8 +15,6 @@
             <li><input type="text" class="search_bar" id="search-bar-input" placeholder="search posts"></li>
             <li><img class="logo" src="/static/logo/poster-logos_transparent.png"></li>
             <li><a href="#" class="active">posters</a></li>
-            <li><a href="#" >Login</a></li>
-            <li><a href="#">Register</a></li>
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
@@ -53,7 +51,18 @@
         </ul>
         </div>
     </div>
+    <form class="logout-form" action="/logout" method="POST">
+        <button>logout</button>
+        </form>
 </body>
     
 </body>
+<script type="text/javascript">
+const textarea = document.getElementById("posted-post");
+
+textarea.addEventListener("input", function (e) {
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
+</script>
 </html>

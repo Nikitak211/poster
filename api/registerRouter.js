@@ -4,7 +4,7 @@ const router = express.Router();
 // const mydata = require('../models/mydata');
 
 router.post('/register', (req, res) => {
-    res.sen(console.log('hello'))
+    res.send(console.log('hello'))
 })
 
 module.exports = router;

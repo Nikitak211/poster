@@ -17,15 +17,15 @@
             <li><a href="#" class="active">Register</a></li>
         </ul>
     </header>
-    <form class="register_form" id="register_Form" method="get" action="/">
+    <form class="register_form" method="POST" action="/register">
         
         <div class=register_form_inputs">
             <div class="inputs">
-                <label for="name">First name</label>
+                <label for="firstName">First name</label>
                 <input id="first_name" name="name" class="Register_input" type="text" placeholder="Enter your name">
             </div>
             <div class="inputs">
-                <label for="last-name">Last name</label>
+                <label for="lastName">Last name</label>
                 <input id="last_name" name="last-name" class="Register_input" type="text" placeholder="Enter your last name">
             </div>
             <div class="inputs">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="register_button">
-            <button id="register_form_button" class="register_button">Register</button>
+            <button class="register_button">Register</button>
         </div>
     </form>
 </body>
