@@ -7,28 +7,24 @@ router.post('/register', async (req, res) => {
     const {
         username,
         password,
-        email,
-        lastName,
-        firstName
-        } = req.body
+        email
+    } = req.body
 
-    let user = await User.findOne({email})
+    let user = await User.findOne({ email })
 
     if (user) {
         return res.redirect('/register');
     }
- 
+
     const hashedPass = await bcrypt.hash(password, 12);
 
     user = new User({
         username,
         password: hashedPass,
-        email,
-        lastName,
-        firstName
+        email
     })
     await user.save();
     res.redirect('/')
 });
 
-    module.exports = router;
+module.exports = router;

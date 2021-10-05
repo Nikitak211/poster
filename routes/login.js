@@ -4,22 +4,22 @@ const User = require('../models/user')
 const bcrypt = require('Bcryptjs')
 
 router.post('/', async (req, res) => {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
     if (!user) {
-        return  res.redirect('/');
+        return res.redirect('/');
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-        return  res.redirect('/');
+        return res.redirect('/');
     }
 
     req.session.isAuth = true
     res.redirect('/homepage');
 });
 
-    module.exports = router;
+module.exports = router;
