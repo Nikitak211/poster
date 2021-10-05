@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
 const bcrypt = require('Bcryptjs')
-const jwt = require('jsonwebtoken')
 
 router.post('/register', async (req, res) => {
     const {
@@ -31,4 +30,5 @@ router.post('/register', async (req, res) => {
     await user.save();
     res.redirect('/')
 });
+
     module.exports = router;
