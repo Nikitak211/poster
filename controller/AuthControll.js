@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const bcrypt = require('Bcryptjs')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const register = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
@@ -24,8 +25,8 @@ const register = (req, res, next) => {
 }
 
 const login = (req, res, next) => {
-    var username = req.body.username
-    var password = req.body.password
+    const username = req.body.username
+    const password = req.body.password
 
     User.findOne({
         $or: [
@@ -42,7 +43,7 @@ const login = (req, res, next) => {
                         })
                     }
                     if (result) {
-                        let token = jwt.sign({ name: user.name }, ')"ĩĐ(ĐõÛ}vß}ĩ', { expiresIn: '1h' })
+                        let token = jwt.sign({ name: user.name }, process.env.SecretToken, { expiresIn: '1h' })
                         res.json({
                             message: 'Login successfully',
                             token

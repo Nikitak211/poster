@@ -1,7 +1,10 @@
+//Third party packeges
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user')
 const bcrypt = require('Bcryptjs')
+
+//My imports
+const User = require('../models/user')
 
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
@@ -19,7 +22,7 @@ router.post('/', async (req, res) => {
     }
 
     req.session.isAuth = true
-    res.redirect('/homepage');
+    res.redirect('/');
 });
 
 module.exports = router;

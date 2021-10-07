@@ -1,7 +1,10 @@
+//Third party packeges
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user')
 const bcrypt = require('Bcryptjs')
+
+//My imports
+const User = require('../models/user')
 
 router.post('/register', async (req, res) => {
     const {
