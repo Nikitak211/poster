@@ -334,3 +334,12 @@ button{
     align-items: center;
 
 }
+.title-write-post{
+    position: absolute;
+    display:inline;
+    align-items: top;
+    margin-top:-10em;
+    margin-left:3em;
+    width: 10em;
+    height: 14px;
+}

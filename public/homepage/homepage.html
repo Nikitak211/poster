@@ -18,9 +18,10 @@
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
-    <form class="post_form_container">
+    <form class="post_form_container" method="POST" action="/post">
+        <input for="title" type="text" class="title-write-post" placeholder="enter your title">
         <div class="post-inputs">
-            <textarea placeholder="Write something on your post" id="post-body"></textarea>
+            <textarea for="postBody" placeholder="Write something on your post" id="post-body"></textarea>
         </div>
         <div class="post-btn">
             <button id="post-btn">Post</button>

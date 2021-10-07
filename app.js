@@ -1,17 +1,22 @@
+//Third parte packages
 const express = require('express');
 const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
-const AuthRoute = require('./routes/auth')
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const login = require('./routes/login');
-const register = require('./routes/register');
-const logout = require('./routes/logout');
 
+// .env confing
+require('dotenv').config();
+
+//mongoose promise
 mongoose.Promise = global.Promise
 
-const mongoDBUri = 'mongodb+srv://PosterApp:A1s2f4g5%2A@poster-data.noemv.mongodb.net/Data'
+//My imports
+const ApiRoutes = require('./routes/auth')
+
+// your URI for mongoDB from .env file.
+const mongoDBUri = process.env.MongoDBUri
 
 mongoose.connect(mongoDBUri,
     {
@@ -41,32 +46,25 @@ const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
         next();
     } else {
-        res.redirect('/')
+        res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
     }
 }
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
-})
 
 app.get('/register', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/register/register.html'))
 })
 
-app.get('/homepage', isAuth, (req, res) => {
+app.get('/', isAuth, (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/homepage/homepage.html'))
 })
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
-
 //body parser Midware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api', AuthRoute)
+app.use('/api', ApiRoutes)
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use(login)
-app.use(register)
-app.use(logout)
