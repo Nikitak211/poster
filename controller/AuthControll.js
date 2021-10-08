@@ -3,8 +3,6 @@ const bcrypt = require('Bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
-//My imports
-const User = require('../models/user')
 
 const register = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
@@ -46,7 +44,7 @@ const login = (req, res, next) => {
                         })
                     }
                     if (result) {
-                        let token = jwt.sign({ name: user.name }, process.env.SecretToken, { expiresIn: '1h' })
+                        let token = jwt.sign({ name: user.name }, process.env.JWT_SECRET, { expiresIn: '1h' })
                         res.json({
                             message: 'Login successfully',
                             token

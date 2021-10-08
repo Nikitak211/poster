@@ -9,14 +9,11 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 // .env confing
 require('dotenv').config();
 
-//mongoose promise
-mongoose.Promise = global.Promise
-
 //My imports
 const ApiRoutes = require('./routes/auth')
 
 // your URI for mongoDB from .env file.
-const mongoDBUri = process.env.MongoDBUri
+const mongoDBUri = process.env.MONGODB_URI
 
 mongoose.connect(mongoDBUri,
     {
@@ -36,7 +33,7 @@ const store = new MongoDBStore({
 });
 
 app.use(session({
-    secret: 'slob that bob top',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
