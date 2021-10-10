@@ -90,7 +90,7 @@ form{
     display:grid;
     align-items:center;
     justify-content: center;
-    padding:5px;
+    padding:2px;
 }
 input{
     border-radius: 5px;
@@ -112,6 +112,23 @@ label{
     border:1px solid transparent;
     border-radius: 10px;
 }
+
 .inputs.error input{
     border: 2px solid #e74c3c;
+}
+.inputs.success input{
+    border: 2px solid #3ce767
+}
+.inputs.success small {
+    visibility: hidden;
+}
+.inputs small {
+    visibility: hidden;
+}
+.inputs.error small {
+    visibility:visible;
+    color:#523936;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-shadow: 1px 1px 3px #e74c3c;
+
 }

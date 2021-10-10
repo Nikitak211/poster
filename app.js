@@ -9,9 +9,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 // require packege for the .env file
 require('dotenv').config()
 
-mongoose.Promise = global.Promise
-
-//My imports
+//Local imports
 const login = require('./routes/login');
 const register = require('./routes/register');
 const logout = require('./routes/logout');
@@ -38,7 +36,7 @@ const store = new MongoDBStore({
 });
 
 app.use(session({
-    secret: process.env.SECRET,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,

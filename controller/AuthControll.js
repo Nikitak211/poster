@@ -2,7 +2,7 @@
 const bcrypt = require('Bcryptjs')
 const jwt = require('jsonwebtoken')
 
-//My imports
+//Local imports
 const User = require('../models/user')
 
 const register = (req, res, next) => {

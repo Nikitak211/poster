@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('Bcryptjs')
 
-//My imports
+//Local imports
 const User = require('../models/user')
 
 router.post('/register', async (req, res) => {
