@@ -1,8 +1,8 @@
-//Third parte packages
+//Third party packages
 const express = require('express');
 const router = express.Router();
 
-//My imports
+//Local imports
 const AuthControll = require('../controller/AuthControll');
 
 router.post('/register', AuthControll.register);

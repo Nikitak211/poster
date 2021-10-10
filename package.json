@@ -24,8 +24,7 @@
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.2",
-    "mongoose": "^6.0.7",
-    "node": "^16.9.1"
+    "mongoose": "^6.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

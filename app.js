@@ -1,4 +1,4 @@
-//Third parte packages
+//Third party packages
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -9,7 +9,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 // .env confing
 require('dotenv').config();
 
-//My imports
+//Local imports
 const ApiRoutes = require('./routes/auth')
 
 // your URI for mongoDB from .env file.
@@ -33,7 +33,7 @@ const store = new MongoDBStore({
 });
 
 app.use(session({
-    secret: process.env.SECRET,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,

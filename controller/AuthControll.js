@@ -1,4 +1,4 @@
-//Third parte packages
+//Third party packages
 const bcrypt = require('Bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
