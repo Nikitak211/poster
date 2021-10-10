@@ -16,7 +16,9 @@ router.post('/register', async (req, res) => {
     let user = await User.findOne({ email })
 
     if (user) {
-        return res.redirect('/register');
+        res.redirect('/register')
+    } else {
+
     }
 
     const hashedPass = await bcrypt.hash(password, 12);

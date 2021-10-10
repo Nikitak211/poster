@@ -18,7 +18,7 @@ const logout = require('./routes/logout');
 const AuthRoute = require('./routes/auth')
 
 // MongoDBUri form env file goes here.
-const mongoDBUri = process.env.MongoDBUri
+const mongoDBUri = process.env.MONGODB_URI
 
 mongoose.connect(mongoDBUri,
     {
@@ -38,7 +38,7 @@ const store = new MongoDBStore({
 });
 
 app.use(session({
-    secret: process.env.secret,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,

@@ -112,14 +112,6 @@ label{
     border:1px solid transparent;
     border-radius: 10px;
 }
-/* header li img.logo{
-    align-items: left;
-    justify-content:left;
-    margin:0 auto;
-    margin-top:-2em;
-    margin-left: -15em;
-    padding:5px;
-    width:5em;
-    height:5em;
-    filter: opacity(1)  drop-shadow(.10em 0.10em 0.1em #086972) drop-shadow(-.25em -0.15em 0.1em #086972);
-} */
+.inputs.error input{
+    border: 2px solid #e74c3c;
+}
