@@ -39,7 +39,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: store,
+    store: store
 }))
 
 const isAuth = (req, res, next) => {

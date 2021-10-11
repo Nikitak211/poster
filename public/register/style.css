@@ -90,7 +90,7 @@ form{
     display:grid;
     align-items:center;
     justify-content: center;
-    padding:2px;
+    padding:12px;
 }
 input{
     border-radius: 5px;
@@ -115,16 +115,41 @@ label{
 
 .inputs.error input{
     border: 2px solid #e74c3c;
+    animation-name: error-move;
+    animation-duration: 0.3s;
 }
+@keyframes error-move {
+    from {
+        margin-right:8px;
+        background:#e74c3c;
+    }
+    to {
+        margin-left:8px;
+        background:white;
+    }
+}
+
 .inputs.success input{
     border: 2px solid #3ce767
+}
+.inputs.error input::placeholder{
+    color:black;
 }
 .inputs.success small {
     visibility: hidden;
 }
+small {
+    position:absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 auto;
+    margin-top:5em;
+}
 .inputs small {
     visibility: hidden;
 }
+
 .inputs.error small {
     visibility:visible;
     color:#523936;
