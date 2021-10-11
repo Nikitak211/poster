@@ -27,101 +27,97 @@ function checkUser() {
 	let emailValid;
 	let validation_emailValid;
 
-		if (usernameValue === "") {
-			errorOn(username, "username cannot be blank")
-			 usernameValid = false;
-		} else if (usernameValue.includes('@')) {
-			errorOn(username, "username cannot be email")
-			 usernameValid = false;
-		} else { 
-			success(username) 
-			 usernameValid = true;
+	if (usernameValue === "") {
+		errorOn(username, "username cannot be blank")
+		usernameValid = false;
+	} else if (usernameValue.includes('@')) {
+		errorOn(username, "username cannot be email")
+		usernameValid = false;
+	} else {
+		success(username)
+		usernameValid = true;
+	}
+
+	if (passwordValue === "") {
+		errorOn(password, "password cannot be blank")
+		passwordValid = false
+	} else if (passwordValue.length < 8) {
+		errorOn(password, "password must contain minimum of 8 charecters.")
+		passwordValid = false
+	} else {
+		success(password)
+		passwordValid = true
+	}
+
+	if (validation_passwordValue !== passwordValue) {
+		errorOn(validation_password, "password is not matching...")
+		validation_passwordValid = false
+	} else if (validation_passwordValue === "") {
+		errorOn(validation_password, "password cannot be blank")
+		validation_passwordValid = false
+	} else if (validation_passwordValue.length < 8) {
+		errorOn(validation_password, "password must contain minimum of 8 charecters.")
+		validation_passwordValid = false
+	} else {
+		success(validation_password)
+		validation_passwordValid = true
+	}
+
+	if (emailValue === "") {
+		errorOn(email, "email cannot be blank")
+		emailValid = false
+	} else if (!isEmail(emailValue)) {
+		errorOn(email, "need to enter email address")
+		emailValid = false
+	} else {
+		success(email)
+		emailValid = true
+	}
+
+	if (validation_emailValue !== emailValue) {
+		errorOn(validation_email, "email is not matching...")
+		validation_emailValid = false
+	}
+	else if (validation_emailValue === "") {
+		errorOn(validation_email, "email cannot be blank")
+		validation_emailValid = false
+	} else if (!isEmail(validation_emailValue)) {
+		errorOn(validation_email, "need to enter email address")
+		validation_emailValid = false
+	} else {
+		success(validation_email)
+		validation_emailValid = true
+	}
+
+	if (usernameValid === true && passwordValid === true && validation_passwordValid === true && emailValid === true && validation_emailValid === true) {
+
+		const options = {
+			username: usernameValue,
+			password: passwordValue,
+			email: emailValue
 		}
 
-		if (passwordValue === "") {
-			errorOn(password, "password cannot be blank")
-			passwordValid = false
-		} else if (passwordValue.length < 8) {
-			errorOn(password, "password must contain minimum of 8 charecters.")
-			passwordValid = false
-		} else { 
-			success(password)
-			passwordValid = true
-		 }
-
-		if (validation_passwordValue !== passwordValue) {
-			errorOn(validation_password, "password is not matching...")
-			validation_passwordValid = false
-		} else if (validation_passwordValue === "") {
-			errorOn(validation_password, "password cannot be blank")
-			validation_passwordValid = false
-		} else if (validation_passwordValue.length < 8) {
-			errorOn(validation_password, "password must contain minimum of 8 charecters.")
-			validation_passwordValid = false
-		} else { 
-			success(validation_password)
-			validation_passwordValid =true	
-		
-		}
-
-		if (emailValue === "") {
-			errorOn(email, "email cannot be blank")
-			emailValid = false
-		} else if (!isEmail(emailValue)) {
-			errorOn(email, "need to enter email address")
-			emailValid = false
-		} else { 
-			success(email)
-			emailValid = true
-		 }
-
-		if (validation_emailValue !== emailValue) {
-			errorOn(validation_email, "email is not matching...")
-			validation_emailValid = false
-		}
-		else if (validation_emailValue === "") {
-			errorOn(validation_email, "email cannot be blank")
-			validation_emailValid = false
-		} else if (!isEmail(validation_emailValue)) {
-			errorOn(validation_email, "need to enter email address")
-			validation_emailValid = false		
-		} else { 
-			success(validation_email)
-			validation_emailValid = true
-		}
-
-		
-		if (usernameValid === true && passwordValid === true && validation_passwordValid === true && emailValid === true && validation_emailValid === true) {
-
-			const options = {
-				username: usernameValue,
-				password: passwordValue,
-				email: emailValue
-			}
-		
-			fetch('/register', {
-				method: 'POST', // or 'PUT'
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(options),
+		fetch('/register', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(options),
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
 			})
-				.then(response => response.json())
-				.then(data => {
-					console.log('Success:', data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
-		
-			console.log(options)
-		
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+
+		console.log(options)
 
 	} else {
 
-	
 	}
-	
+
 }
 
 
@@ -141,6 +137,3 @@ function success(input) {
 function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
-
-
-
