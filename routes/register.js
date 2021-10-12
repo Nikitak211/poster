@@ -11,12 +11,13 @@ router.post('/register', async (req, res) => {
         username,
         password,
         email
-    } = req.body.options
+    } = req.body
 
     let user = await User.findOne({ email })
 
     if (user) {
         res.redirect('/register')
+        
     } else {
 
     }
@@ -29,7 +30,7 @@ router.post('/register', async (req, res) => {
         email
     })
     await user.save();
-    res.redirect('/')
+     res.redirect('/')
 });
 
 module.exports = router;

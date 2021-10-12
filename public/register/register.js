@@ -5,10 +5,6 @@ const email = document.getElementById('email');
 const validation_email = document.getElementById('validation_email');
 const register_btn = document.getElementById('register_btn');
 
-register_btn.addEventListener('click', (event) => {
-	event.preventDefault();
-	checkUser();
-})
 document.getElementById("register_form").addEventListener('submit', (event) => {
 	event.preventDefault();
 	checkUser();
@@ -92,12 +88,12 @@ function checkUser() {
 	if (usernameValid === true && passwordValid === true && validation_passwordValid === true && emailValid === true && validation_emailValid === true) {
 
 		const options = {
-			username: usernameValue,
-			password: passwordValue,
-			email: emailValue
+			"username": usernameValue,
+			"password": passwordValue,
+			"email": emailValue
 		}
 
-		fetch('/register', {
+		fetch('/api/register', {
 			method: 'POST', // or 'PUT'
 			headers: {
 				'Content-Type': 'application/json',
@@ -106,21 +102,20 @@ function checkUser() {
 		})
 			.then(response => response.json())
 			.then(data => {
-				console.log('Success:', data);
+				'Success:', data;
+				location.href = '/'
 			})
 			.catch((error) => {
+				alert('email all ready in use')
+				location.href = '/register'
 				console.error('Error:', error);
 			});
-
-		console.log(options)
 
 	} else {
 
 	}
 
 }
-
-
 
 function errorOn(input, message) {
 	const formControl = input.parentElement;

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // Local imports
-const AuthControll = require('../controller/AuthControll');
+const AuthControll = require('../controler/AuthControl');
 
 router.post('/register', AuthControll.register);
 router.post('/', AuthControll.login);
