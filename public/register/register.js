@@ -88,9 +88,9 @@ function checkUser() {
 	if (usernameValid === true && passwordValid === true && validation_passwordValid === true && emailValid === true && validation_emailValid === true) {
 
 		const options = {
-			"username": usernameValue,
-			"password": passwordValue,
-			"email": emailValue
+			username: usernameValue,
+			password: passwordValue,
+			email: emailValue
 		}
 
 		fetch('/api/register', {
@@ -100,16 +100,18 @@ function checkUser() {
 			},
 			body: JSON.stringify(options),
 		})
-			.then(response => response.json())
-			.then(data => {
-				'Success:', data;
-				location.href = '/'
-			})
-			.catch((error) => {
-				alert('email all ready in use')
-				location.href = '/register'
-				console.error('Error:', error);
-			});
+		.then( response => {
+			response.json()
+		} )
+		.then( data => {
+			'Success:', data;
+			location.href = '/'
+		})
+		.catch( (error) => {
+			alert('email all ready in use',error)
+				window.location = '/register'
+			
+		})		
 
 	} else {
 

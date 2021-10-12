@@ -50,7 +50,7 @@ const isAuth = (req, res, next) => {
     }
 }
 
-app.get('/register', (req, res) => {
+app.get('/register',register, (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/register/register.html'))
 })
 
