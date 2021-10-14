@@ -10,9 +10,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 
 //Local imports
-const login = require('./routes/login');
-const register = require('./routes/register');
-const logout = require('./routes/logout');
 const AuthRoute = require('./routes/auth')
 
 // MongoDBUri form env file goes here.
@@ -43,18 +40,19 @@ app.use(session({
 }))
 
 const isAuth = (req, res, next) => {
-    if (req.session.isAuth) {
-        next();
-    } else {
-        res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
+    try{
+        if ( !req.session.authorization ) res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
+        else next(); 
+    }catch (error) {
+        return res.send({status:true, message:'your session is bot valid', data:error}) 
     }
 }
 
-app.get('/register',register, (req, res) => {
+app.get('/register', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/register/register.html'))
 })
 
-app.get('/', isAuth, (req, res) => {
+app.get('/',isAuth , (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/homepage/homepage.html'))
 })
 
@@ -65,9 +63,6 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api', AuthRoute)
+app.use('/api/auth/', AuthRoute )
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use(login)
-app.use(register)
-app.use(logout)

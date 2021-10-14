@@ -10,7 +10,7 @@ document.getElementById("register_form").addEventListener('submit', (event) => {
 	checkUser();
 })
 
-function checkUser() {
+async function  checkUser() {
 	const usernameValue = username.value.trim();
 	const passwordValue = password.value.trim();
 	const validation_passwordValue = validation_password.value.trim();
@@ -93,30 +93,23 @@ function checkUser() {
 			email: emailValue
 		}
 
-		fetch('/api/register', {
+		const response = await fetch('/api/auth/register', {
 			method: 'POST', // or 'PUT'
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(options),
 		})
-		.then( response => {
-			response.json()
-		} )
-		.then( data => {
-			'Success:', data;
-			location.href = '/'
-		})
-		.catch( (error) => {
-			alert('email all ready in use',error)
-				window.location = '/register'
-			
-		})		
+		const json = await response.json()
 
-	} else {
-
-	}
-
+		if(json.registerError){
+			errorOn(email, json.registerError)
+			errorOn(validation_email, json.registerError)
+		}
+		if (json.success) {
+			window.location = "/";
+		}
+	} 
 }
 
 function errorOn(input, message) {

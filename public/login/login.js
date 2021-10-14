@@ -7,7 +7,7 @@ document.getElementById('loginForm').addEventListener('submit',(e) => {
 })
 
 
-function login() {
+async function login() {
     const passwordValue = password.value.trim();
     const emailValue = email.value.trim();
 
@@ -16,16 +16,21 @@ function login() {
         password: passwordValue
     } 
 
-    fetch('/api/' ,{
+    const response = await fetch('/api/auth/login' ,{
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(options)
     })
-    .then( response => response.json() )
-    .then((data) => {
-        data
-        window.location = "/"
-      })
+    const json = await response.json()
+    if(json.error){
+        errorOn(email, json.login)
+        errorOn(password, json.login)
+        return alert(json.login)
+    }
+    if (json.isAuth) {
+        window.location = "/";
+    }
 }
+
