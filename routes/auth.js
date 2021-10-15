@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 //Local imports
 const User = require('../models/user')
 
-router.post('/register', async (req, res, next) => {
+router.post('/register', async (req, res) => {
     try{
     const {
         username,
@@ -17,7 +17,10 @@ router.post('/register', async (req, res, next) => {
 
     let user = await User.findOne({ email })
     if (user) {
-        return res.send({ registerError: "email allready exsisting" })
+        return res.send({ 
+            error: true,
+            message: "email allready exsisting" 
+        })
     }
 
     const hashedPass = await bcrypt.hash(password, 12);
@@ -29,62 +32,77 @@ router.post('/register', async (req, res, next) => {
     })
 
     await user.save()
-        res.send({success: "user has created"})
+        res.send({
+            success: true,
+            message: "user has created"
+        })
     } catch (error) {
-        res.send({error: "cannot complete registration"})
+        res.send({
+            error: true,
+            message: "cannot complete registration"
+        })
         console.error(error)
     }
 });
 
 router.post('/login', async (req, res) => {
-    try{
     const {
         email,
-        password 
+        password,
     } = req.body
 
-
-    await User.findOne({
-        $or: [
-            { email: email }
-        ]
-    })
-        .then(user => {
-            if (user) {
-                bcrypt.compare(password, user.password, function (err, result) {
-                    if (err) {
-                            return res.send({
-                                loginError: 'password of email doesnt exsist'
-                            })
+    User.findOne({ email })
+    .then(user => {
+        if (user) {
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (err) {
+                    res.send({
+                        error: true,
+                        message: 'somthing went wrong'
+                    })
                     }
+                if (result) {
 
-                    if (result) {
-                        
-                        const token = jwt.sign({ name: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
-                        req.session.authorization = token
-                        return res.send({
-                            status: true,
-                            isAuth: 'Login successfully',
-                             token
-                        })
-                        
-                    }
-                })
-            } 
-        })
-} catch {
-    res.send({
-        login: 'password of email doesnt exsist'
+                    const token = jwt.sign({ name: User.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
+                    req.session.authorization = token
+                    return res.send({
+                        success: true,
+                        isAuth: 'Login successfully',
+                        data: token
+                    })
+                } else {
+                    return res.send({
+                        error:true, 
+                        message: 'email/password is incorrect'
+                    });
+                }
+            })
+        } else {
+            res.send({ 
+                error: true, 
+                message: "email/password is incorrect"
+            })
+        }
+    }).catch( (error) => {
+        console.error(error)
     })
-}});
+});
 
 router.post('/logout', (req, res) => {
-    if(logout){
-    req.session.destroy((err) => {
-        res.send( {drop: 'logout succsess'})
-        if (err) throw err;
+    req.session.destroy((error) => {
+        if (!error) {
+            res.send({
+                success: true,
+                message: "Logged out."
+            })
+        }   
+        if (error) {
+            res.send({
+                error: true,
+                message:'an error has been encountered'
+            })
+        };
     })
-    }
 })
 
 module.exports = router;

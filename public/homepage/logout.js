@@ -8,14 +8,15 @@ async function logout() {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({send:'logout'})
+        }
     })
-    const json = await response.json()
-    if(req.body.send){
-        res.send({logout: true})
-        location.reload()
-        alert(json.drop)
-    }
     
+    const json = await response.json()
+
+        if ( json.success ) {
+            location.reload()
+            alert(json.message)
+        }
+
+        if ( json.error ) alert( json.message )
     }

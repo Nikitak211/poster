@@ -10,82 +10,68 @@ document.getElementById("register_form").addEventListener('submit', (event) => {
 	checkUser();
 })
 
-async function  checkUser() {
+async function checkUser() {
 	const usernameValue = username.value.trim();
 	const passwordValue = password.value.trim();
 	const validation_passwordValue = validation_password.value.trim();
 	const emailValue = email.value.trim();
 	const validation_emailValue = validation_email.value.trim();
 
-	let usernameValid;
-	let passwordValid;
-	let validation_passwordValid;
-	let emailValid;
-	let validation_emailValid;
+	let success = [];
 
-	if (usernameValue === "") {
-		errorOn(username, "username cannot be blank")
-		usernameValid = false;
-	} else if (usernameValue.includes('@')) {
-		errorOn(username, "username cannot be email")
-		usernameValid = false;
-	} else {
-		success(username)
-		usernameValid = true;
+	const usernameValidation = (value,input) => {
+    	if (value === "") {
+			errorOn(input, "username cannot be blank")
+		} else if (value.includes('@')) {
+			errorOn(input, "username cannot be email")
+		} else {
+			successOn(input)
+			success.push({ success: true })
+		}
+    }
+	usernameValidation(usernameValue,username)
+	
+	const passwordValidation = (value,value2,input) => {
+		if (value === "") {
+			errorOn(input, "password cannot be blank")
+		} else if (value.length < 8) {
+			errorOn(input, "password must contain minimum of 8 charecters.")
+		} else {
+			successOn(input)
+		 	success.push({ success: true })
+		}
 	}
+	passwordValidation(passwordValue,validation_passwordValue,password)
+	passwordValidation(validation_passwordValue,passwordValue,validation_password)
 
-	if (passwordValue === "") {
-		errorOn(password, "password cannot be blank")
-		passwordValid = false
-	} else if (passwordValue.length < 8) {
-		errorOn(password, "password must contain minimum of 8 charecters.")
-		passwordValid = false
-	} else {
-		success(password)
-		passwordValid = true
+	const passwordMatch = (value,value2,input) => {
+		if (value !== value2) {
+			errorOn(input, "password is not matching...")
+		}
 	}
+	passwordMatch(validation_passwordValue,passwordValue,validation_password)
 
-	if (validation_passwordValue !== passwordValue) {
-		errorOn(validation_password, "password is not matching...")
-		validation_passwordValid = false
-	} else if (validation_passwordValue === "") {
-		errorOn(validation_password, "password cannot be blank")
-		validation_passwordValid = false
-	} else if (validation_passwordValue.length < 8) {
-		errorOn(validation_password, "password must contain minimum of 8 charecters.")
-		validation_passwordValid = false
-	} else {
-		success(validation_password)
-		validation_passwordValid = true
+	 const emailValidation = (value,input) => {
+		 if (value === "") {
+			errorOn(input, "email cannot be blank")
+		} else if (!isEmail(value)) {
+			errorOn(input, "need to enter email address")
+		} else {
+			successOn(input)
+			success.push({ success: true })
+		}
 	}
+	emailValidation(emailValue,email)
+	emailValidation(validation_emailValue,validation_email)
 
-	if (emailValue === "") {
-		errorOn(email, "email cannot be blank")
-		emailValid = false
-	} else if (!isEmail(emailValue)) {
-		errorOn(email, "need to enter email address")
-		emailValid = false
-	} else {
-		success(email)
-		emailValid = true
+	const emailMatch = (value,value2,input) => {
+		if (value !== value2) {
+			errorOn(input, "email is not matching...")
+		}
 	}
+	emailMatch(emailValue,validation_emailValue,validation_email)
 
-	if (validation_emailValue !== emailValue) {
-		errorOn(validation_email, "email is not matching...")
-		validation_emailValid = false
-	}
-	else if (validation_emailValue === "") {
-		errorOn(validation_email, "email cannot be blank")
-		validation_emailValid = false
-	} else if (!isEmail(validation_emailValue)) {
-		errorOn(validation_email, "need to enter email address")
-		validation_emailValid = false
-	} else {
-		success(validation_email)
-		validation_emailValid = true
-	}
-
-	if (usernameValid === true && passwordValid === true && validation_passwordValid === true && emailValid === true && validation_emailValid === true) {
+	if (success[0] && success[1] && success[2] && success[3] && success[4] && success[5]) {
 
 		const options = {
 			username: usernameValue,
@@ -100,16 +86,16 @@ async function  checkUser() {
 			},
 			body: JSON.stringify(options),
 		})
-		const json = await response.json()
+		const Data = await response.json()
 
-		if(json.registerError){
-			errorOn(email, json.registerError)
-			errorOn(validation_email, json.registerError)
+		if(Data.error){
+			errorOn(email, Data.message)
+			errorOn(validation_email, Data.message)
 		}
-		if (json.success) {
+		if (Data.success) {
 			window.location = "/";
 		}
-	} 
+	}
 }
 
 function errorOn(input, message) {
@@ -119,7 +105,7 @@ function errorOn(input, message) {
 	small.innerText = message;
 }
 
-function success(input) {
+function successOn(input) {
 	const formControl = input.parentElement;
 	formControl.className = 'inputs success';
 }

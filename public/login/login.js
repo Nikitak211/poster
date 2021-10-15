@@ -6,7 +6,6 @@ document.getElementById('loginForm').addEventListener('submit',(e) => {
     login()
 })
 
-
 async function login() {
     const passwordValue = password.value.trim();
     const emailValue = email.value.trim();
@@ -14,23 +13,50 @@ async function login() {
     const options = {
         email: emailValue,
         password: passwordValue
-    } 
-
-    const response = await fetch('/api/auth/login' ,{
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options)
-    })
-    const json = await response.json()
-    if(json.error){
-        errorOn(email, json.login)
-        errorOn(password, json.login)
-        return alert(json.login)
     }
-    if (json.isAuth) {
-        window.location = "/";
+
+    let success = [];
+
+    const emptyField = (value,input) => {
+        if (value === "") {
+            errorOn(input,"cannot be blank")
+        } else {
+            success.push({ success: true })
+        }
+    }
+    emptyField(passwordValue,password,"password")
+    emptyField(emailValue, email,"email")
+    
+    if ( success[0]  && success[1] ) {
+
+        const response = await fetch('/api/auth/login' ,{
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(options)
+        })
+        const Data = await response.json()
+        if (Data.success) {
+            successOn(email)
+            successOn(password)
+            window.location = "/";
+        }
+         else if (Data.error) {
+            errorOn(email, Data.message)
+            errorOn(password, Data.message)
+        } 
     }
 }
 
+function errorOn(input, message) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	formControl.className = 'inputs error';
+	small.innerText = message;
+}
+
+function successOn(input) {
+	const formControl = input.parentElement;
+	formControl.className = 'inputs success';
+}
