@@ -71,7 +71,7 @@ async function checkUser() {
 	}
 	emailMatch(emailValue,validation_emailValue,validation_email)
 
-	if (success[0] && success[1] && success[2] && success[3] && success[4] && success[5]) {
+	if (success[0] && success[1] && success[2] && success[3] && success[4]) {
 
 		const options = {
 			username: usernameValue,
