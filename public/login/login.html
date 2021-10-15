@@ -18,7 +18,7 @@
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
-    <form class="login_form" id="loginForm" method="GET" action="/">
+    <form class="login_form" id="loginForm" >
         <div class="header">
             <h1>login</h1>
         </div>
@@ -26,17 +26,20 @@
             <div class="inputs">
                 <label for="email">Email</label>
                 <input id="email" class="login_input" name="email" type="text" placeholder="Enter your Email">
+                <small></small>
             </div>
             <div class="inputs">
                 <label for="password">password</label>
                 <input id="password" class="login_input" name="password" type="text" placeholder="Enter your password">
+                <small>cannot be blank</small>
             </div>
         </div>
         <div class="login_button">
-            <button id="login_form_button" class="button">Login</button>
-            <button id="register_btn" type="submit" id="register" class="button_register">Register</button>
+            <button type="submit" class="button">Login</button>
+            <button id="register" class="button_register">Register</button>
         </div>
 </body>
     
 </body>
+<script type="text/javascript" src="/static/login/login.js"></script>
 </html>
