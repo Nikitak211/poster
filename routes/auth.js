@@ -89,6 +89,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+   
     req.session.destroy((error) => {
         if (!error) {
             res.send({
@@ -103,6 +104,41 @@ router.post('/logout', (req, res) => {
             })
         };
     })
+    
 })
+
+router.post('/post',async (req, res) => {
+    try{
+        const {
+            username,
+            title,
+            content,
+            comments
+        } = req.body
+
+        let user = await User.findOne({ _id })
+        if (user) {
+             user =  User({
+                title: title,
+                content: content,
+                comments:[comments]
+            })
+            user.save()
+            res.send({ 
+                success: true,
+                username: user.username,
+                title: user.title,
+                content: user.content,
+                comments: user.comments,
+                message: "post successfully created",
+            })
+        }
+    } catch (error) {
+        res.send({
+            error: true,
+            message: error,
+        })
+    }
+}) 
 
 module.exports = router;

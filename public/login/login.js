@@ -1,6 +1,8 @@
 const password = document.getElementById('password');
 const email = document.getElementById('email');
 
+document.getElementById('register-page').addEventListener('click', () => window.location = '/register')
+
 document.getElementById('loginForm').addEventListener('submit',(e) => {
     e.preventDefault();
     login()

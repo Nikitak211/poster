@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/homepage/style.css">
-    <script src="/static/homepage/script.js"></script>
     <title>Poster</title>
 </head>
 <body>
@@ -18,29 +17,30 @@
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
-    <form class="post_form_container">
+    <form id="postFormFill" class="post_form_container">
         <div class="post-inputs">
-            <textarea placeholder="Write something on your post" id="post-body"></textarea>
+            <textarea type="text" placeholder="Write something on your post" class="post-body" id="post-body-form"></textarea>
         </div>
         <div class="post-btn">
-            <button id="post-btn">Post</button>
+            <input id="titleInput" class="title-post-form" type="text" placeholder="Enter your title...">
+            <button class="post-btn-form">Post</button>
         </div>
     </form>
-    <div class="btn_container">
+    <div class="new-posted-post">
         <div class="new-post">
-            <h2 class="author-post">Nikita Kogan</h2>
-            <label class="posted-post-title">my best title</label>
-            <small class="post-date">21/12/21</small>
-            <a href="#" ><label>👨🏻‍💻</label></a>
-            <textarea readonly id="posted-post" class="posted-post">
+            <h2 id="postAuthor" class="author-post">Nikita Kogan</h2>
+            <label id="postTitle" class="posted-post-title">my best title</label>
+            <small id="postDate" class="post-date">21/12/21</small>
+            <a href="#" ><label id="authorsProfilePicture">👨🏻‍💻</label></a>
+            <textarea id="postContent" readonly id="posted-post" class="posted-post">
                 this post is the best toast
             </textarea>
             <li class="commented-comment">
                 <b></b>
                 <b></b>
-                <a href="#" >😄</a>
-                <label>user</label>
-                <small id="posted-post" type="textarea">this post is great</small>
+                <a href="#" id="commentor-profile">😄</a>
+                <label id="commentor-name">user</label>
+                <small id="posted-comment" type="textarea">this post is great</small>
             </li>    
         </div>
         <div class="post-inputs comment">
@@ -55,13 +55,6 @@
 </body>
     
 </body>
-<script type="text/javascript">
-const textarea = document.getElementById("posted-post");
-
-textarea.addEventListener("input", function (e) {
-  this.style.height = "auto";
-  this.style.height = this.scrollHeight + "px";
-});
-</script>
 <script type="text/javascript" src="/static/homepage/logout.js"></script>
+<script type="text/javascript" src="/static/homepage/posting.js"></script>
 </html>

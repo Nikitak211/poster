@@ -5,6 +5,8 @@ const email = document.getElementById('email');
 const validation_email = document.getElementById('validation_email');
 const register_btn = document.getElementById('register_btn');
 
+document.getElementById('login-page').addEventListener('click', () => window.location = "/")
+
 document.getElementById("register_form").addEventListener('submit', (event) => {
 	event.preventDefault();
 	checkUser();

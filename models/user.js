@@ -16,9 +16,13 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "postData"
+    }]
 });
 
-const userdata = mongoose.model('User', userSchema);
+const userdata = mongoose.model('user', userSchema);
 
 module.exports = userdata;
