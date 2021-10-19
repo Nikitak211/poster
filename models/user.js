@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 //Schema creater and models
 
@@ -17,9 +17,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: "postData"
+    posts:[{
+        type: String,
+        ref: "Post"
     }]
 });
 

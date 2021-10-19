@@ -6,32 +6,33 @@ const jwt = require('jsonwebtoken');
 
 //Local imports
 const User = require('../models/user')
+const postSchema = require('../models/postSchema')
 
 router.post('/register', async (req, res) => {
-    try{
-    const {
-        username,
-        password,
-        email
-    } = req.body
+    try {
+        const {
+            username,
+            password,
+            email
+        } = req.body
 
-    let user = await User.findOne({ email })
-    if (user) {
-        return res.send({ 
-            error: true,
-            message: "email allready exsisting" 
+        let user = await User.findOne({ email })
+        if (user) {
+            return res.send({
+                error: true,
+                message: "email allready exsisting"
+            })
+        }
+
+        const hashedPass = await bcrypt.hash(password, 12);
+
+        user = new User({
+            username,
+            password: hashedPass,
+            email
         })
-    }
 
-    const hashedPass = await bcrypt.hash(password, 12);
-
-    user = new User({
-        username,
-        password: hashedPass,
-        email
-    })
-
-    await user.save()
+        await user.save()
         res.send({
             success: true,
             message: "user has created"
@@ -52,93 +53,89 @@ router.post('/login', async (req, res) => {
     } = req.body
 
     User.findOne({ email })
-    .then(user => {
-        if (user) {
-            bcrypt.compare(password, user.password, function (err, result) {
-                if (err) {
-                    res.send({
-                        error: true,
-                        message: 'somthing went wrong'
-                    })
+        .then(user => {
+            if (user) {
+                bcrypt.compare(password, user.password, function (err, result) {
+                    if (err) {
+                        res.send({
+                            error: true,
+                            message: 'somthing went wrong'
+                        })
                     }
-                if (result) {
+                    if (result) {
 
-                    const token = jwt.sign({ name: User.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
-                    req.session.authorization = token
-                    return res.send({
-                        success: true,
-                        isAuth: 'Login successfully',
-                        data: token
-                    })
-                } else {
-                    return res.send({
-                        error:true, 
-                        message: 'email/password is incorrect'
-                    });
-                }
-            })
-        } else {
-            res.send({ 
-                error: true, 
-                message: "email/password is incorrect"
-            })
-        }
-    }).catch( (error) => {
-        console.error(error)
-    })
+                        const token = jwt.sign({ name: User.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
+                        req.session.authorization = token
+                        return res.send({
+                            success: true,
+                            isAuth: 'Login successfully',
+                            data: token
+                        })
+                    } else {
+                        return res.send({
+                            error: true,
+                            message: 'email/password is incorrect'
+                        });
+                    }
+                })
+            } else {
+                res.send({
+                    error: true,
+                    message: "email/password is incorrect"
+                })
+            }
+        }).catch((error) => {
+            console.error(error)
+        })
 });
 
 router.post('/logout', (req, res) => {
-   
+
     req.session.destroy((error) => {
         if (!error) {
             res.send({
                 success: true,
                 message: "Logged out."
             })
-        }   
+        }
         if (error) {
             res.send({
                 error: true,
-                message:'an error has been encountered'
+                message: 'an error has been encountered'
             })
         };
     })
-    
+
 })
 
-router.post('/post',async (req, res) => {
-    try{
+router.post('/post', async (req, res) => {
+    try {
         const {
-            username,
             title,
-            content,
-            comments
+            content
         } = req.body
 
-        let user = await User.findOne({ _id })
-        if (user) {
-             user =  User({
-                title: title,
-                content: content,
-                comments:[comments]
-            })
-            user.save()
-            res.send({ 
-                success: true,
-                username: user.username,
-                title: user.title,
-                content: user.content,
-                comments: user.comments,
-                message: "post successfully created",
-            })
-        }
+        const id = Data.users._id
+
+        let post = new postSchema([{
+            title,
+            content
+        }])
+        User.findOne(id).insertOne(post)
+        res.send({
+            success: true,
+            username: Data.users.username,
+            title: post.title,
+            content: post.content,
+            message: "post successfully created",
+        })
+
     } catch (error) {
         res.send({
             error: true,
             message: error,
         })
     }
-}) 
+})
 
 module.exports = router;

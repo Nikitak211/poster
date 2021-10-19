@@ -4,21 +4,21 @@
 // create and add like & dislike function.
 // create an comment to the created post , and so it will save to mongodb.
 const postTitle = document.getElementById('titleInput');
-const postTextArea = document.getElementById('post-body-form');
+const postTextArea = document.getElementById('postBodyForm');
 
 document.getElementById('postFormFill').addEventListener('submit', (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     postForm();
 })
-let title = postTitle.value
-let postContent = postTextArea.value
+let titleValue = postTitle.value
+let postContentValue = postTextArea.value
 
 async function postForm() {
     const options = {
-        title: title,
-		postContent: postContent
+        title: titleValue,
+		content: postContentValue
     }
-    const response = await fetch('/api/auth/post', {
+    const response = fetch('/api/auth/post', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,11 @@ async function postForm() {
     const Data = await response.json()
 
     if(Data.success){
-        alert(Data.success)
+        alert({success: true,
+            username: Data.users.username,
+            title: post.title,
+            content: post.content,
+            message: "post successfully created",})
     } else {
         console.log(Data.error)
     }

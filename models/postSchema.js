@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 //Schema creater and models
 
 const postSchema = new Schema({
-    title: String,
-    content: String,
-    comments:[{
-        type: Schema.Types.ObjectId,
-        ref: "comments"
-    }]
+    title: {
+        type: String
+    },
+    content: {
+        type: String
+    }
 });
 
 const postdata = mongoose.model('Post', postSchema);
