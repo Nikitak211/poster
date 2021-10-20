@@ -10,10 +10,11 @@ document.getElementById('postFormFill').addEventListener('submit', (e) => {
     e.preventDefault();
     postForm();
 })
-let titleValue = postTitle.value
-let postContentValue = postTextArea.value
 
 async function postForm() {
+  
+  let titleValue = postTitle.value
+  let postContentValue = postTextArea.value
     const options = {
         title: titleValue,
 		content: postContentValue
@@ -29,9 +30,9 @@ async function postForm() {
 
     if(Data.success){
         alert({success: true,
-            username: Data.users.username,
-            title: post.title,
-            content: post.content,
+            username: Data.username,
+            title: Data.title,
+            content: Data.content,
             message: "post successfully created",})
     } else {
         console.log(Data.error)

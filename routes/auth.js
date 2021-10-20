@@ -115,8 +115,6 @@ router.post('/post', async (req, res) => {
             content
         } = req.body
 
-        const id = Data.users._id
-
         let post = new postSchema([{
             title,
             content
@@ -125,8 +123,8 @@ router.post('/post', async (req, res) => {
         res.send({
             success: true,
             username: Data.users.username,
-            title: post.title,
-            content: post.content,
+            title: title,
+            content: content,
             message: "post successfully created",
         })
 
