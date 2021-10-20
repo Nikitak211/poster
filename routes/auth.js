@@ -13,10 +13,12 @@ router.post('/register', async (req, res) => {
         const {
             username,
             password,
-            email
+            email,
+            date,
+            avatar
         } = req.body
 
-        let user = await User.findOne({ email })
+        let user = await User.findOne({email})
         if (user) {
             return res.send({
                 error: true,
@@ -24,12 +26,15 @@ router.post('/register', async (req, res) => {
             })
         }
 
+       
         const hashedPass = await bcrypt.hash(password, 12);
 
         user = new User({
-            username,
-            password: hashedPass,
-            email
+				username,
+				password: hashedPass,
+				email,
+				date,
+				avatar
         })
 
         await user.save()
@@ -48,11 +53,11 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const {
-        email,
         password,
+        email
     } = req.body
 
-    User.findOne({ email })
+    User.findOne({email})
         .then(user => {
             if (user) {
                 bcrypt.compare(password, user.password, function (err, result) {
@@ -64,7 +69,7 @@ router.post('/login', async (req, res) => {
                     }
                     if (result) {
 
-                        const token = jwt.sign({ name: User.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
+                        const token = jwt.sign( {name: user.username}, process.env.JWT_SECRET, { expiresIn: '1h' })
                         req.session.authorization = token
                         return res.send({
                             success: true,
@@ -119,7 +124,7 @@ router.post('/post', async (req, res) => {
             title,
             content
         }])
-        post.save()
+        await post.save()
         res.send({
             success: true,
             username: Data.users.username,
@@ -136,4 +141,8 @@ router.post('/post', async (req, res) => {
     }
 })
 
+router.get('/post', async (req, res) => {
+    let post = postSchema
+    res.send(post)
+})
 module.exports = router;

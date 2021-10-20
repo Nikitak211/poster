@@ -6,10 +6,10 @@
 const postTitle = document.getElementById('titleInput');
 const postTextArea = document.getElementById('postBodyForm');
 
-document.getElementById('postFormFill').addEventListener('submit', (e) => {
-    e.preventDefault();
-    postForm();
-})
+// document.getElementById('postFormFill').addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     postForm();
+// })
 
 async function postForm() {
   

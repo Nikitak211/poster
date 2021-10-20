@@ -13,8 +13,8 @@ async function login() {
     const emailValue = email.value.trim();
 
     const options = {
-        email: emailValue,
-        password: passwordValue
+            password: passwordValue,
+            email: emailValue
     }
 
     let success = [];

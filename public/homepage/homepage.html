@@ -10,51 +10,98 @@
 <body>
     <header>
         <ul>
-            <label id="head" class="header_name">posters</label>
-            <li><input type="text" class="search_bar" id="search-bar-input" placeholder="search posts"></li>
-            <li><img class="logo" src="/static/logo/poster-logos_transparent.png"></li>
-            <li><a href="#" class="active">posters</a></li>
+            <li><label id="head" class="header_name">posters</label></li>
+            <li><input type="search" class="search_bar" id="search" placeholder="search posts"></li>
+            <img class="logo" src="/static/logo/poster-logos_transparent.png">
             <li id="notification"><a href="#"></a></li>
         </ul>
     </header>
-    <form id="postFormFill" class="post_form_container">
-        <div class="post-inputs">
-            <textarea type="text" placeholder="Write something on your post" class="post-body" id="postBodyForm"></textarea>
+    <main>
+    <div class="container">
+        <div class="post-container">
+            
         </div>
-        <div class="post-btn">
-            <input id="titleInput" class="title-post-form" type="text" placeholder="Enter your title...">
-            <button class="post-btn-form">Post</button>
-        </div>
-    </form>
-    <div class="new-posted-post">
-        <div class="new-post">
-            <h2 id="postAuthor" class="author-post">Nikita Kogan</h2>
-            <label id="postTitle" class="posted-post-title">my best title</label>
-            <small id="postDate" class="post-date">21/12/21</small>
-            <a href="#" ><label id="authorsProfilePicture">👨🏻‍💻</label></a>
-            <textarea id="postContent" readonly id="posted-post" class="posted-post">
-                this post is the best toast
-            </textarea>
-            <li class="commented-comment">
-                <b></b>
-                <b></b>
-                <a href="#" id="commentor-profile">😄</a>
-                <label id="commentor-name">user</label>
-                <small id="posted-comment" type="textarea">this post is great</small>
-            </li>    
-        </div>
-        <div class="post-inputs comment">
-            <ul>
-            <li><button id="like-btn">Like</button></li>
-            <li><button id="comment-btn">comment</button></li>
-            <textarea class="comment-textarea"></textarea>
-        </ul>
-        </div>
-    </div>
+    </div> 
     <button id="logout_btn">logout</button>
-</body>
+</main>
+<script>
+    (function loadSkeleton() {
+        const skeletonCSS = `
+        <style>
+          .skeleton {
+            border-radius: 5px;
+            animation: 650ms linear infinite alternate skeleton-loading;
+          }
+          
+          .post__tag {
+            height: 20px;
+            width: 50px;
+          }
+          .post__tag:last-of-type {
+            width: 110px;
+          }
+          .post__date, .post__author--name {
+            height: 28px;
+            width: 100px;
+          }
+          .post__author--name {
+            margin-bottom: 10px;
+            width: 50px;
+          }
+        
+          .post__author--avatar {
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+          }
+          .post__body .skeleton {
+            min-height: 18px;
+            margin-bottom: 10px;
+          }
+          
+          .post__body .skeleton:last-of-type {
+            width: 80%;
+          }
+          @keyframes skeleton-loading {
+            0% {
+              background-color: hsl(var(--accent2));
+            }
+            100% {
+              background-color: hsl(var(--accent1) / .2);
+            }
+          }
+        </style>
+        `;
+        const skeleton = `
+        <article class="post">
+  <div class="post__meta">
+    <div class="post__tag--container">
+      <span class="skeleton post__tag"></span>
+    </div>
+    <p class="skeleton post__date"></p>
+  </div>
+  <h3 class="skeleton post__header">
     
+  </h3>
+  <div class="post__author">
+    <div class="skeleton post__author--avatar" width="55" ></div>
+    <div>
+      <p class="skeleton post__author--name"></p>
+    </div>
+  </div>
+  <div class="post__body">
+    <p class="skeleton"></p>
+    <p class="skeleton"></p>
+    <p class="skeleton"></p>
+    <p class="skeleton"></p>
+  </div>
+  <a href="#" class="skeleton btn"></a></article>
+        `;
+    document.querySelector('.post-container').innerHTML = [skeleton.repeat(3), skeletonCSS].join('');
+    })();
+  </script>
 </body>
+<script type="text/javascript" src="/static/homepage/posts.js"></script>
 <script type="text/javascript" src="/static/homepage/logout.js"></script>
 <script type="text/javascript" src="/static/homepage/posting.js"></script>
 </html>
