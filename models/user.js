@@ -16,11 +16,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    posts:[{
-        type: String,
-        ref: "Post"
-    }]
+    }
 });
 
 const userdata = mongoose.model('user', userSchema);

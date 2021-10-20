@@ -121,7 +121,7 @@ router.post('/post', async (req, res) => {
             title,
             content
         }])
-        User.findOne(id).insertOne(post)
+        post.save()
         res.send({
             success: true,
             username: Data.users.username,
