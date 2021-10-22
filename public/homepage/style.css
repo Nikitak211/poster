@@ -63,7 +63,7 @@ body{
 }
 
 label{
-    font-size: var(-xsm);
+    font-size: var(--xsm);
 }
 [type="search"] {
     -webkit-appearance: none;

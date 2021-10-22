@@ -18,7 +18,6 @@ async function checkUser() {
 	const validation_passwordValue = validation_password.value.trim();
 	const emailValue = email.value.trim();
 	const validation_emailValue = validation_email.value.trim();
-	const randomAvatar = "https://robohash.org/"+Math.random()+"?set=set4&bgset=&size=400x400"
 	let success = [];
 
 	const usernameValidation = (value,input) => {
@@ -82,8 +81,7 @@ async function checkUser() {
 				username: usernameValue,
 				password: passwordValue,
 				email: emailValue,
-				date: new Date(),
-				avatar: randomAvatar
+				date: new Date()
 		}
 
 		const response = await fetch('/api/auth/register', {

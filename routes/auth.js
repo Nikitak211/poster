@@ -14,8 +14,7 @@ router.post('/register', async (req, res) => {
             username,
             password,
             email,
-            date,
-            avatar
+            date
         } = req.body
 
         let user = await User.findOne({email})
@@ -26,15 +25,19 @@ router.post('/register', async (req, res) => {
             })
         }
 
-       
         const hashedPass = await bcrypt.hash(password, 12);
+        
+        const cryptEmail = await bcrypt.hash(email, 12);
+        
+        const randomAvatar = "https://avatars.dicebear.com/v2/avataaars/"+cryptEmail+".svg"
+        
 
         user = new User({
 				username,
 				password: hashedPass,
 				email,
 				date,
-				avatar
+				avatar:randomAvatar
         })
 
         await user.save()

@@ -1,4 +1,3 @@
-// check if isAuth.
 // send current logged username and the form data to mongodb to be saved.
 // then get current logged username, data.post.textare, data.post.title.
 // create and add like & dislike function.
@@ -15,10 +14,10 @@ async function postForm() {
   
   let titleValue = postTitle.value
   let postContentValue = postTextArea.value
-    const options = {
-        title: titleValue,
-		content: postContentValue
-    }
+    const options = [{
+      title: titleValue,
+		  content: postContentValue
+    }]
     const response = fetch('/api/auth/post', {
         method: 'POST', // or 'PUT'
         headers: {
@@ -28,13 +27,4 @@ async function postForm() {
     })
     const Data = await response.json()
 
-    if(Data.success){
-        alert({success: true,
-            username: Data.username,
-            title: Data.title,
-            content: Data.content,
-            message: "post successfully created",})
-    } else {
-        console.log(Data.error)
-    }
 };
