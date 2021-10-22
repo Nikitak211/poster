@@ -1,5 +1,4 @@
 // send current logged username and the form data to mongodb to be saved.
-// then get current logged username, data.post.textare, data.post.title.
 // create and add like & dislike function.
 // create an comment to the created post , and so it will save to mongodb.
 const postTitle = document.getElementById('titleInput');
@@ -15,7 +14,8 @@ async function postForm() {
   let postContentValue = postTextArea.value
     const options = {
       title: titleValue,
-		  content: postContentValue
+		  content: postContentValue,
+		  date: new Date()
     }
     const response = fetch('/api/auth/post', {
         method: 'POST', // or 'PUT'

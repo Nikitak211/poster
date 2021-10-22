@@ -8,7 +8,7 @@ const search = document.querySelector('[type="search"]');
 // create cards and update the UI
 function generatePost(post){
   const returnPostDate = (date) => `${
-    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${date.getHours()},':',${date.getMinutes()}`;
   const article = document.createElement('article');
   article.classList.add('post');
   article.innerHTML = `

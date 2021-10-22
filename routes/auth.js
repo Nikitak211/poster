@@ -121,7 +121,8 @@ router.post('/post', async (req, res) => {
     try {
         const {
             title,
-            content
+            content,
+            date
         } = req.body
 
             User.findOne(req.session)
@@ -132,7 +133,7 @@ router.post('/post', async (req, res) => {
                     content,
                     author: user.author,
                     avatar: user.avatar,
-                    date: user.date
+                    date
                 }) 
                 post.save()
                 res.send({
