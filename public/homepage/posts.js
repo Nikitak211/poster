@@ -1,6 +1,6 @@
 let posts = [];
 let filteredPosts = [];
-const POSTS_TO_SHOW = 6;
+const POSTS_TO_SHOW = 100;
 let maxDisplayLimit = POSTS_TO_SHOW;
 const postContainer = document.querySelector('.post-container');
 const search = document.querySelector('[type="search"]');
@@ -49,7 +49,7 @@ function filterPosts() {
 
 // fetch the data from json test
 async function fetchPosts() {
-    await fetch('/static/homepage/posts.json')
+    await fetch('/api/auth/post')
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

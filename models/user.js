@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 //Schema creater and models
 
 const userSchema = new Schema({
-        username: {
+        author: {
             type: String,
             required: true
         },
@@ -17,8 +17,12 @@ const userSchema = new Schema({
             type: String,
             required: true
         },
-        date: Date,
-        avatar: String,
+        date: {
+            type: String
+        },
+        avatar: {
+            type: String
+        }
 });
 
 const userdata = mongoose.model('user', userSchema);

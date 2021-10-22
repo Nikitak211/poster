@@ -5,19 +5,18 @@
 const postTitle = document.getElementById('titleInput');
 const postTextArea = document.getElementById('postBodyForm');
 
-// document.getElementById('postFormFill').addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     postForm();
-// })
+document.getElementById('postFormFill').addEventListener('submit', (e) => {
+    postForm();
+})
 
 async function postForm() {
   
   let titleValue = postTitle.value
   let postContentValue = postTextArea.value
-    const options = [{
+    const options = {
       title: titleValue,
 		  content: postContentValue
-    }]
+    }
     const response = fetch('/api/auth/post', {
         method: 'POST', // or 'PUT'
         headers: {
@@ -25,6 +24,5 @@ async function postForm() {
         },
         body: JSON.stringify(options),
     })
-    const Data = await response.json()
 
 };

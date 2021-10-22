@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('Bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 //Local imports
 const User = require('../models/user')
 const postSchema = require('../models/postSchema')
@@ -11,7 +12,7 @@ const postSchema = require('../models/postSchema')
 router.post('/register', async (req, res) => {
     try {
         const {
-            username,
+            author,
             password,
             email,
             date
@@ -33,7 +34,7 @@ router.post('/register', async (req, res) => {
         
 
         user = new User({
-				username,
+				author,
 				password: hashedPass,
 				email,
 				date,
@@ -48,7 +49,7 @@ router.post('/register', async (req, res) => {
     } catch (error) {
         res.send({
             error: true,
-            message: "cannot complete registration"
+            message: ["cannot complete registration", error]
         })
         console.error(error)
     }
@@ -72,7 +73,7 @@ router.post('/login', async (req, res) => {
                     }
                     if (result) {
 
-                        const token = jwt.sign( {name: user.username}, process.env.JWT_SECRET, { expiresIn: '1h' })
+                        const token = jwt.sign( {email: user.email}, process.env.JWT_SECRET, { expiresIn: '1h' })
                         req.session.authorization = token
                         return res.send({
                             success: true,
@@ -123,19 +124,22 @@ router.post('/post', async (req, res) => {
             content
         } = req.body
 
-        let post = new postSchema([{
-            title,
-            content
-        }])
-        await post.save()
-        res.send({
-            success: true,
-            username: Data.users.username,
-            title: title,
-            content: content,
-            message: "post successfully created",
-        })
-
+            User.findOne(req.session)
+            .then( user => {
+    
+                let post = new postSchema({
+                    title,
+                    content,
+                    author: user.author,
+                    avatar: user.avatar,
+                    date: user.date
+                }) 
+                post.save()
+                res.send({
+                    success: true,
+                    message: "post successfully created"
+                })
+            })        
     } catch (error) {
         res.send({
             error: true,
@@ -145,7 +149,26 @@ router.post('/post', async (req, res) => {
 })
 
 router.get('/post', async (req, res) => {
-    let post = postSchema
-    res.send(post)
+    postSchema.find()
+    .then(post => {
+        res.send(post)
+        console.log(post)
+    })
+})
+
+router.get('/logged',async (req, res) => {
+    User.find(req.session)
+        .then( user => {
+            res.send({
+                success: true,
+                author: user.author,
+                avatar: user.avatar
+            })
+        }).catch((error) => {
+            res.send({ 
+                error: true,
+                message: error,
+            });
+        });
 })
 module.exports = router;

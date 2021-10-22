@@ -10,9 +10,7 @@ async function logout() {
             'Content-Type': 'application/json',
         }
     })
-    
     const json = await response.json()
-
         if ( json.success ) {
             location.reload()
             alert(json.message)

@@ -3,10 +3,9 @@ const Schema = mongoose.Schema;
 
 //Schema creater and models
 
-const postSchema = new Schema({
+const postSchema = new Schema([{
     author: {
-        type: String,
-        ref:"User"
+        type: String
     },
     title: {
         type: String
@@ -15,14 +14,12 @@ const postSchema = new Schema({
         type: String
     },
     avatar: {
-        type: String,
-        ref:"User"
+        type: String
     },
     date: {
-        type: Date,
-        ref: "User"
+        type: Date
     }
-});
+}]);
 
 const postdata = mongoose.model('Post', postSchema);
 

@@ -9,20 +9,33 @@
 </head>
 <body>
     <header>
-        <ul>
-            <li><label id="head" class="header_name">posters</label></li>
-            <li><input type="search" class="search_bar" id="search" placeholder="search posts"></li>
-            <img class="logo" src="/static/logo/poster-logos_transparent.png">
-            <li id="notification"><a href="#"></a></li>
-        </ul>
+      <div>
+        <img class="post__author--avatar" width="55" src="" id="avatarLogged">
+        <label class="post__author--name" id="authorLogged"></label>
+      </div>
+      <ul>
+        <button class="btn_logout" id="logout_btn">logout</button>
+        <li><input type="search" class="search_bar" id="search" placeholder="search posts"></li>
+        <img class="logo" src="/static/logo/poster-logos_transparent.png">
+        <li id="notification"><a href="#"></a></li>
+      </ul>
     </header>
+    <form id="postFormFill">
+      <div class="container">
+        <div class="formFillArea">
+          <button class="btn_post">post</button>
+          <input type="text" class="post__tag" id="titleInput">
+          <textarea id="postBodyForm" placeholder="write your post here..." class="post__body"></textarea>
+        </div>
+      </div>
+      
+      </form>
     <main>
+
     <div class="container">
         <div class="post-container">
-            
         </div>
     </div> 
-    <button id="logout_btn">logout</button>
 </main>
 <script>
     (function loadSkeleton() {
@@ -101,6 +114,7 @@
     })();
   </script>
 </body>
+<!-- <script type="text/javascript" src="/static/homepage/headerinfo.js"></script> -->
 <script type="text/javascript" src="/static/homepage/posts.js"></script>
 <script type="text/javascript" src="/static/homepage/logout.js"></script>
 <script type="text/javascript" src="/static/homepage/posting.js"></script>

@@ -78,7 +78,7 @@ async function checkUser() {
 		
 
 		const options = {
-				username: usernameValue,
+				author: usernameValue,
 				password: passwordValue,
 				email: emailValue,
 				date: new Date()
