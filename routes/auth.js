@@ -144,8 +144,7 @@ router.post('/post', async (req, res) => {
                             success: true,
                             message: 'post has been successfully saved'
                         })
-                    })
-                    
+                    }) 
                 }
             })
         }
