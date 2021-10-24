@@ -10,13 +10,12 @@
 <body>
     <header>
         <ul>
-            <label id="head" class="header_name">Register</label>
-            <li><img class="logo" src="/static/logo/poster-logos_transparent.png"></li>
-            <li><a id="login-page" href="#" >Login</a></li>
-            <li><a href="#" class="active">Register</a></li>
+            <img class="logo" src="/static/logo/poster-logos_transparent.png">
+            <li><a class="post__tag" id="login-page" href="#" >Login</a></li>
         </ul>
     </header>
     <form id="register_form" class="register_form">
+        <div class="register_form_container">
         <div class=register_form_inputs">
             <div class="inputs">
                 <label for="username">Username</label>
@@ -44,9 +43,10 @@
                 <small>there is and error!</small>
             </div>
         </div>
-        <div class="register_button">
-            <button  id="register_btn" class="register_button">Register</button>
+        <div class="btns">
+            <button  id="register_btn" class="post__tag">Register</button>
         </div>
+    </div>
     </form>
 </body>
     
