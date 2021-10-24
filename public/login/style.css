@@ -5,7 +5,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 input,
 button,
@@ -44,7 +43,6 @@ input::placeholder{
     --radius--sm: 5px;
     --radius-lg: 15px;
     --transition: all 160ms cubic-bezier(0.99, 0.03, 0.68, 0.93);
-
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap');
@@ -135,7 +133,6 @@ header{
 header li {
     position: relative;
     display: inline-flex;
-   
 }
 header li a {
     width:fit-content;
@@ -230,7 +227,6 @@ small {
     color:#523936;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     text-shadow: 1px 1px 3px #e74c3c;
-
 }
 h1{
     display: flex;

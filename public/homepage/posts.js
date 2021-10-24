@@ -32,7 +32,6 @@ function generatePost(post){
   return article;
 }
 
-
 function loadPosts(){
   const frag = document.createDocumentFragment();
   filteredPosts.slice(0, maxDisplayLimit).map((post) => frag.appendChild(generatePost(post)));
@@ -49,7 +48,7 @@ function filterPosts() {
   loadPosts();
 }
 
-// fetch the data from json test
+// fetch the data from database
 async function fetchPosts() {
     await fetch('/api/auth/post')
         .then((response) => {

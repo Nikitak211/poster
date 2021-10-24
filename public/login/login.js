@@ -43,8 +43,7 @@ async function login() {
             successOn(email)
             successOn(password)
             window.location = "/";
-        }
-         else if (Data.error) {
+        } else if (Data.error) {
             errorOn(email, Data.message)
             errorOn(password, Data.message)
         } 

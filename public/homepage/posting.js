@@ -17,8 +17,6 @@ async function sendPost() {
     let postContentValidate = postTextArea.value.trim()
     let success = [];
 
-    
-
     if(titleValidate === ""){
         errorOnTitle(postTitle)
     } else {
@@ -47,11 +45,9 @@ async function sendPost() {
         })
         const Data = await response.json()
 
-		if (Data.success) {
-			window.location = "/";
-		}
-
-
+		    if (Data.success) {
+			    window.location = "/";
+		    }
     }
 };
 

@@ -29,54 +29,52 @@ async function checkUser() {
 			successOn(input)
 			success.push({ success: true })
 		}
-    }
+  }
 	usernameValidation(usernameValue,username)
 	
-	const passwordValidation = (value,value2,input) => {
-		if (value === "") {
-			errorOn(input, "password cannot be blank")
-		} else if (value.length < 8) {
-			errorOn(input, "password must contain minimum of 8 charecters.")
+	const passwordValidation = ( value, value2, input ) => {
+		if ( value === "" ) {
+			errorOn( input, "password cannot be blank")
+		} else if ( value.length < 8 ) {
+			errorOn( input, "password must contain minimum of 8 charecters." )
 		} else {
-			successOn(input)
+			successOn( input )
 		 	success.push({ success: true })
 		}
 	}
-	passwordValidation(passwordValue,validation_passwordValue,password)
-	passwordValidation(validation_passwordValue,passwordValue,validation_password)
+	passwordValidation( passwordValue, validation_passwordValue, password )
+	passwordValidation( validation_passwordValue, passwordValue, validation_password )
 
-	const passwordMatch = (value,value2,input) => {
-		if (value !== value2) {
-			errorOn(input, "password is not matching...")
+	const passwordMatch = ( value, value2, input ) => {
+		if ( value !== value2 ) {
+			errorOn( input, "password is not matching..." )
 		}
 	}
-	passwordMatch(validation_passwordValue,passwordValue,validation_password)
+	passwordMatch( validation_passwordValue, passwordValue, validation_password )
 
-	 const emailValidation = (value,input) => {
-		 if (value === "") {
-			errorOn(input, "email cannot be blank")
-		} else if (!isEmail(value)) {
-			errorOn(input, "need to enter email address")
-		} else {
-			successOn(input)
-			success.push({ success: true })
+  const emailValidation = ( value, input ) =>  {
+  		 if ( value === "" ) {
+  			errorOn( input, "email cannot be blank" )
+  		} else if (!isEmail( value )) {
+  			errorOn( input, "need to enter email address" )
+  		} else {
+  			successOn( input )
+  			success.push({ success: true })
+  		}
+    
+  }
+	emailValidation( emailValue, email )
+	emailValidation( validation_emailValue, validation_email )
+
+	const emailMatch = ( value, value2, input ) => {
+		if ( value !== value2 ) {
+			errorOn( input, "email is not matching..." )
 		}
 	}
-	emailValidation(emailValue,email)
-	emailValidation(validation_emailValue,validation_email)
-
-	const emailMatch = (value,value2,input) => {
-		if (value !== value2) {
-			errorOn(input, "email is not matching...")
-		}
-	}
-	emailMatch(emailValue,validation_emailValue,validation_email)
+	emailMatch( emailValue, validation_emailValue, validation_email )
 	
-	if (success[0] && success[1] && success[2] && success[3] && success[4]) {
-
-		
-		
-
+	if ( success[0] && success[1] && success[2] && success[3] && success[4] ) {
+	  
 		const options = {
 				author: usernameValue,
 				password: passwordValue,
@@ -93,28 +91,28 @@ async function checkUser() {
 		})
 		const Data = await response.json()
 
-		if(Data.error){
-			errorOn(email, Data.message)
-			errorOn(validation_email, Data.message)
+		if( Data.error ){
+			errorOn( email, Data.message )
+			errorOn( validation_email, Data.message )
 		}
-		if (Data.success) {
+		if ( Data.success ) {
 			window.location = "/";
 		}
 	}
 }
 
-function errorOn(input, message) {
+function errorOn( input, message ) {
 	const formControl = input.parentElement;
 	const small = formControl.querySelector('small');
 	formControl.className = 'inputs error';
 	small.innerText = message;
 }
 
-function successOn(input) {
+function successOn( input ) {
 	const formControl = input.parentElement;
 	formControl.className = 'inputs success';
 }
 
-function isEmail(email) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+function isEmail( email ) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( email );
 }
