@@ -8,18 +8,12 @@ const logo = document.getElementById('avatarLogged');
 const author = document.getElementById('authorLogged');
 
 // create cards and update the UI
-<<<<<<< HEAD
 function generatePost(post){    
   const returnPostDate = (date) =>
   `${
   ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`;
   logo.src = post.avatar;
   author.innerText = post.author
-=======
-function generatePost(post){
-  const returnPostDate = (date) => `${
-    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${date.getHours()},':',${date.getMinutes()}`;
->>>>>>> 1bf3d4a35e8380f03ae4e3edb8100ec5515d3f84
   const article = document.createElement('article');
   article.classList.add('post');
   article.innerHTML = `
