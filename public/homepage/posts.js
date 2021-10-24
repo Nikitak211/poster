@@ -4,11 +4,16 @@ const POSTS_TO_SHOW = 100;
 let maxDisplayLimit = POSTS_TO_SHOW;
 const postContainer = document.querySelector('.post-container');
 const search = document.querySelector('[type="search"]');
+const logo = document.getElementById('avatarLogged');
+const author = document.getElementById('authorLogged');
 
 // create cards and update the UI
-function generatePost(post){
-  const returnPostDate = (date) => `${
-    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+function generatePost(post){    
+  const returnPostDate = (date) =>
+  `${
+  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`;
+  logo.src = post.avatar;
+  author.innerText = post.author
   const article = document.createElement('article');
   article.classList.add('post');
   article.innerHTML = `
@@ -30,6 +35,7 @@ function generatePost(post){
   `;
   return article;
 }
+
 
 function loadPosts(){
   const frag = document.createDocumentFragment();

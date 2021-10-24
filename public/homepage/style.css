@@ -210,6 +210,7 @@ header img.logo {
 .formFillArea{
     width: auto ;
     background-color: hsl(var(--bkg));
+    border-radius: 0 0 15px 15px;
     z-index:1;
 
 }
@@ -218,6 +219,7 @@ textarea {
     resize: none;
     outline: none;
     padding-bottom: 10em;
+    border-radius:  0 0 15px 15px;
 }
 input.post__tag {
     width:10em;
@@ -238,4 +240,17 @@ input.post__tag {
     background: hsl(var(--accent1));
     width: var(--xlg);
     border-radius:var(--radius--sm);
+}
+.post__tag.error {
+    border: 2px solid rgb(228, 79, 79);
+}
+.post__body.error {
+    border: 2px solid rgb(228, 79, 79);
+    border-radius:  0 0 15px 15px;
+}
+.post__body.success {
+    border: 1px solid hsl(var(--bkg));
+}
+.post__tag.success{
+    border: 1px solid hsl(var(--bkg));
 }
