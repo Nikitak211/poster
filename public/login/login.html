@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/login/style.css">
-    <title>Login</title>
-</head>
-<body>
-    <header>
-        <ul>
-            <img class="logo" src="/static/logo/poster-logos_transparent.png">
-        </ul>
-    </header>
-    <form class="login_form" id="loginForm" >
-        <div class="login_form_container">
-            <div class="formHeader">
-                <h1>login</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/login/style.css">
+        <title>Login</title>
+    </head>
+    <body>
+        <header>
+            <ul>
+                <img class="logo" src="/static/logo/poster-logos_transparent.png">
+            </ul>
+        </header>
+        <form class="login_form" id="loginForm" >
+            <div class="login_form_container">
+                <div class="formHeader">
+                    <h1>login</h1>
+                </div>
+                <div class=login_form_inputs">
+                    <div class="inputs">
+                        <label for="email">Email</label>
+                        <input id="email" class="login_input" name="email" type="text" placeholder="Enter your Email" autocomplete="off" spellcheck="">
+                        <small></small>
+                    </div>
+                    <div class="inputs">
+                        <label for="password">password</label>
+                        <input id="password" class="login_input" name="password" type="text" placeholder="Enter your password" autocomplete="off" spellcheck="">
+                        <small>cannot be blank</small>
+                    </div>
+                    <div class="btns">
+                        <button class="post__tag" type="submit">Login</button>
+                        <a class="post__tag" id="register-page" href="#">Register</a>
+                    </div>
+                </div>
             </div>
-            <div class=login_form_inputs">
-                <div class="inputs">
-                    <label for="email">Email</label>
-                    <input id="email" class="login_input" name="email" type="text" placeholder="Enter your Email" autocomplete="off" spellcheck="">
-                    <small></small>
-                </div>
-                <div class="inputs">
-                    <label for="password">password</label>
-                    <input id="password" class="login_input" name="password" type="text" placeholder="Enter your password" autocomplete="off" spellcheck="">
-                    <small>cannot be blank</small>
-                </div>
-                <div class="btns">
-                    <button class="post__tag" type="submit">Login</button>
-                    <a class="post__tag" id="register-page" href="#">Register</a>
-                </div>
-            </div>
-        </div>
-    </form>
-    
-</body>
-<script type="text/javascript" src="/static/login/login.js"></script>
+        </form>
+    </body>
+    <script type="text/javascript" src="/static/login/login.js"></script>
 </html>

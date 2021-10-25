@@ -4,7 +4,6 @@ const router = express.Router();
 const bcrypt = require('Bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
 //Local imports
 const User = require('../models/user')
 const postSchema = require('../models/postSchema')
@@ -18,7 +17,7 @@ router.post('/register', async (req, res) => {
             date
         } = req.body
 
-        let user = await User.findOne({email})
+        let user = await User.findOne({ email })
         if (user) {
             return res.send({
                 error: true,
@@ -27,18 +26,15 @@ router.post('/register', async (req, res) => {
         }
 
         const hashedPass = await bcrypt.hash(password, 12);
-        
         const cryptEmail = await bcrypt.hash(email, 12);
-        
-        const randomAvatar = "https://avatars.dicebear.com/v2/avataaars/"+cryptEmail+".svg"
-        
+        const randomAvatar = "https://avatars.dicebear.com/v2/avataaars/" + cryptEmail + ".svg"
 
         user = new User({
-				author,
-				password: hashedPass,
-				email,
-				date,
-				avatar:randomAvatar
+            author,
+            password: hashedPass,
+            email,
+            date,
+            avatar: randomAvatar
         })
 
         await user.save()
@@ -61,7 +57,7 @@ router.post('/login', async (req, res) => {
         email
     } = req.body
 
-    User.findOne({email})
+    User.findOne({ email })
         .then(user => {
             if (user) {
                 bcrypt.compare(password, user.password, function (err, result) {
@@ -73,7 +69,7 @@ router.post('/login', async (req, res) => {
                     }
                     if (result) {
 
-                        const token = jwt.sign( {_id: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' })
+                        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
                         req.session.authorization = token
                         return res.send({
                             success: true,
@@ -114,7 +110,6 @@ router.post('/logout', (req, res) => {
             })
         };
     })
-
 })
 
 router.post('/post', async (req, res) => {
@@ -125,13 +120,12 @@ router.post('/post', async (req, res) => {
         } = req.body
 
         const token = req.session.authorization;
-        if(token){
+        if (token) {
             jwt.verify(token, process.env.JWT_SECRET, async (err, decodeToken) => {
                 if (err) {
                     res.locals.user = null;
                 } else {
                     await User.findById(decodeToken._id).then(user => {
-
                         post = new postSchema({
                             title,
                             content,
@@ -140,11 +134,11 @@ router.post('/post', async (req, res) => {
                             date: new Date()
                         })
                         post.save()
-                        res.send ({
+                        res.send({
                             success: true,
                             message: 'post has been successfully saved'
                         })
-                    }) 
+                    })
                 }
             })
         }
@@ -158,33 +152,32 @@ router.post('/post', async (req, res) => {
 
 router.get('/post', async (req, res) => {
     postSchema.find()
-    .then(post => {
-        res.send(post)
-        console.log(post)
-    })
+        .then(post => {
+            res.send(post)
+        })
 })
 
-router.get('/logged',async (req, res) => {
+router.get('/logged', async (req, res) => {
     const token = req.session.authorization;
-        if(token){
-            jwt.verify(token, process.env.JWT_SECRET, async (err, decodeToken) => {
-                if (err) {
-                    res.locals.user = null;
-                } else {
-                    await User.findById(decodeToken._id).then( user => {
-                        res.send({
-                            success: true,
-                            author: user.author,
-                            avatar: user.avatar
-                        })
-                    }).catch((error) => {
-                        res.send({ 
-                            error: true,
-                            message: error,
-                        });
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decodeToken) => {
+            if (err) {
+                res.locals.user = null;
+            } else {
+                await User.findById(decodeToken._id).then(user => {
+                    res.send({
+                        success: true,
+                        author: user.author,
+                        avatar: user.avatar
+                    })
+                }).catch((error) => {
+                    res.send({
+                        error: true,
+                        message: error,
                     });
-                }
-            })
-        }        
+                });
+            }
+        })
+    }
 })
 module.exports = router;

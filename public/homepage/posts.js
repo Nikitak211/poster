@@ -6,10 +6,9 @@ const postContainer = document.querySelector('.post-container');
 const search = document.querySelector('[type="search"]');
 
 // create cards and update the UI
-function generatePost(post){    
+function generatePost(post) {
   const returnPostDate = (date) =>
-  `${
-  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`;
+    `${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${date.getHours()}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`;
   const article = document.createElement('article');
   article.classList.add('post');
   article.innerHTML = `
@@ -33,7 +32,7 @@ function generatePost(post){
 }
 
 
-function loadPosts(){
+function loadPosts() {
   const frag = document.createDocumentFragment();
   filteredPosts.slice(0, maxDisplayLimit).map((post) => frag.appendChild(generatePost(post)));
   postContainer.innerHTML = '';
@@ -51,23 +50,21 @@ function filterPosts() {
 
 // fetch the data from json test
 async function fetchPosts() {
-    await fetch('/api/auth/post')
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then((data) => {
-          posts = data;
-          filterPosts()
-        })
-        .catch((error) => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-        
+  await fetch('/api/auth/post')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      posts = data;
+      filterPosts()
+    })
+    .catch((error) => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
 }
-
 fetchPosts();
 
 // filter for search

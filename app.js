@@ -67,4 +67,3 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth/', AuthRoute )
 app.use('/static', express.static(path.join(__dirname, 'public')))
-

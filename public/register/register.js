@@ -20,8 +20,8 @@ async function checkUser() {
 	const validation_emailValue = validation_email.value.trim();
 	let success = [];
 
-	const usernameValidation = (value,input) => {
-    	if (value === "") {
+	const usernameValidation = (value, input) => {
+		if (value === "") {
 			errorOn(input, "username cannot be blank")
 		} else if (value.includes('@')) {
 			errorOn(input, "username cannot be email")
@@ -29,31 +29,31 @@ async function checkUser() {
 			successOn(input)
 			success.push({ success: true })
 		}
-    }
-	usernameValidation(usernameValue,username)
-	
-	const passwordValidation = (value,value2,input) => {
+	}
+	usernameValidation(usernameValue, username)
+
+	const passwordValidation = (value, value2, input) => {
 		if (value === "") {
 			errorOn(input, "password cannot be blank")
 		} else if (value.length < 8) {
 			errorOn(input, "password must contain minimum of 8 charecters.")
 		} else {
 			successOn(input)
-		 	success.push({ success: true })
+			success.push({ success: true })
 		}
 	}
-	passwordValidation(passwordValue,validation_passwordValue,password)
-	passwordValidation(validation_passwordValue,passwordValue,validation_password)
+	passwordValidation(passwordValue, validation_passwordValue, password)
+	passwordValidation(validation_passwordValue, passwordValue, validation_password)
 
-	const passwordMatch = (value,value2,input) => {
+	const passwordMatch = (value, value2, input) => {
 		if (value !== value2) {
 			errorOn(input, "password is not matching...")
 		}
 	}
-	passwordMatch(validation_passwordValue,passwordValue,validation_password)
+	passwordMatch(validation_passwordValue, passwordValue, validation_password)
 
-	 const emailValidation = (value,input) => {
-		 if (value === "") {
+	const emailValidation = (value, input) => {
+		if (value === "") {
 			errorOn(input, "email cannot be blank")
 		} else if (!isEmail(value)) {
 			errorOn(input, "need to enter email address")
@@ -62,28 +62,24 @@ async function checkUser() {
 			success.push({ success: true })
 		}
 	}
-	emailValidation(emailValue,email)
-	emailValidation(validation_emailValue,validation_email)
+	emailValidation(emailValue, email)
+	emailValidation(validation_emailValue, validation_email)
 
-	const emailMatch = (value,value2,input) => {
+	const emailMatch = (value, value2, input) => {
 		if (value !== value2) {
 			errorOn(input, "email is not matching...")
 		}
 	}
-	emailMatch(emailValue,validation_emailValue,validation_email)
-	
+	emailMatch(emailValue, validation_emailValue, validation_email)
+
 	if (success[0] && success[1] && success[2] && success[3] && success[4]) {
-
 		
-		
-
 		const options = {
-				author: usernameValue,
-				password: passwordValue,
-				email: emailValue,
-				date: new Date()
+			author: usernameValue,
+			password: passwordValue,
+			email: emailValue,
+			date: new Date()
 		}
-
 		const response = await fetch('/api/auth/register', {
 			method: 'POST', // or 'PUT'
 			headers: {
@@ -93,7 +89,7 @@ async function checkUser() {
 		})
 		const Data = await response.json()
 
-		if(Data.error){
+		if (Data.error) {
 			errorOn(email, Data.message)
 			errorOn(validation_email, Data.message)
 		}
