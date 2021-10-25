@@ -15,11 +15,7 @@ async function sendPost() {
     let postContentValidate = postTextArea.value.trim()
     let success = [];
 
-<<<<<<< HEAD
     if (titleValidate === "") {
-=======
-    if(titleValidate === ""){
->>>>>>> dd010f7f0b21ddf26a19720511ce4a70ff6e1e13
         errorOnTitle(postTitle)
     } else {
         successOnTitle(postTitle)
