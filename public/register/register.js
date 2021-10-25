@@ -93,24 +93,24 @@ async function checkUser() {
 			errorOn(email, Data.message)
 			errorOn(validation_email, Data.message)
 		}
-		if (Data.success) {
+		if ( Data.success ) {
 			window.location = "/";
 		}
 	}
 }
 
-function errorOn(input, message) {
+function errorOn( input, message ) {
 	const formControl = input.parentElement;
 	const small = formControl.querySelector('small');
 	formControl.className = 'inputs error';
 	small.innerText = message;
 }
 
-function successOn(input) {
+function successOn( input ) {
 	const formControl = input.parentElement;
 	formControl.className = 'inputs success';
 }
 
-function isEmail(email) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+function isEmail( email ) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( email );
 }

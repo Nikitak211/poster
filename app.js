@@ -41,9 +41,7 @@ app.use(session({
 
 const isAuth = (req, res, next) => {
     try{
-        if ( !req.session.authorization ) {
-            res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
-        } 
+        if ( !req.session.authorization ) res.sendFile(path.resolve(__dirname, 'public/login/login.html'))
         else next(); 
     }catch (error) {
         return res.send({status:true, message:'your session is not valid', data:error}) 
