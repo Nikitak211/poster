@@ -22,13 +22,16 @@ async function checkUser() {
 	const usernameValidation = (value, inputToggle) => {
 		if (value === "") {
 			errorOn(inputToggle, "username cannot be blank")
+			return false;
 		} else if (value.includes('@')) {
 			errorOn(inputToggle, "username cannot be email")
+			return false;
 		} else {
 			successOn(inputToggle)
+			return true;
 		}
 	}
-	usernameValidation(usernameValue, username)
+	if (!usernameValidation(usernameValue, username)) return
 
 	const passwordValidation = (value, inputToggle) => {
 		if (value === "") {
@@ -37,77 +40,83 @@ async function checkUser() {
 			errorOn(inputToggle, "password must contain minimum of 8 charecters.")
 		} else {
 			successOn(inputToggle)
+			return true;
 		}
 	}
-	passwordValidation(passwordValue, validation_passwordValue, password)
-	passwordValidation(validation_passwordValue, passwordValue, validation_password)
+	if (!passwordValidation(passwordValue, password)) return;
+	if (!passwordValidation(validation_passwordValue, validation_password)) return;
 
 	const passwordMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
 			errorOn(inputToggle, "password is not matching...")
-			return
+			return false;
+		} else {
+			return true;
 		}
-		
 	}
-	passwordMatch(validation_passwordValue, passwordValue, validation_password)
+	if (!passwordMatch(validation_passwordValue, passwordValue, validation_password)) return;
 
 	const emailValidation = (value, inputToggle) => {
 		if (value === "") {
 			errorOn(inputToggle, "email cannot be blank")
+			return false;
 		} else if (!isEmail(value)) {
 			errorOn(inputToggle, "need to enter email address")
+			return false;
 		} else {
 			successOn(inputToggle)
+			return true;
 		}
 	}
-	emailValidation(emailValue, email)
-	emailValidation(validation_emailValue, validation_email)
+	if (!emailValidation(emailValue, email)) return;
+	if (!emailValidation(validation_emailValue, validation_email)) return;
 
 	const emailMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
 			errorOn(inputToggle, "email is not matching...")
+			return false;
+		} else {
+			return true;
 		}
 	}
-	emailMatch(emailValue, validation_emailValue, validation_email)
+	if (!emailMatch(emailValue, validation_emailValue, validation_email)) return;
 
-	if (!errorOn) {
-		const options = {
-			author: usernameValue,
-			password: passwordValue,
-			email: emailValue,
-			date: new Date()
-		}
-		const response = await fetch('/api/auth/register', {
-			method: 'POST', // or 'PUT'
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(options),
-		})
-		const Data = await response.json()
+	const options = {
+		author: usernameValue,
+		password: passwordValue,
+		email: emailValue,
+		date: new Date()
+	}
+	const response = await fetch('/api/auth/register', {
+		method: 'POST', // or 'PUT'
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(options),
+	})
+	const Data = await response.json()
 
-		if (Data.error) {
-			errorOn(email, Data.message)
-			errorOn(validation_email, Data.message)
-		}
-		if ( Data.success ) {
-			window.location = "/";
-		}
+	if (Data.error) {
+		errorOn(email, Data.message)
+		errorOn(validation_email, Data.message)
+	}
+	if (Data.success) {
+		window.location = "/";
 	}
 }
 
-function errorOn( inputToggle, message ) {
+function errorOn(inputToggle, message) {
 	const formControl = inputToggle.parentElement;
 	const small = formControl.querySelector('small');
 	formControl.className = 'inputs error';
 	small.innerText = message;
 }
 
-function successOn( inputToggle ) {
+function successOn(inputToggle) {
 	const formControl = inputToggle.parentElement;
 	formControl.className = 'inputs success';
 }
 
-function isEmail( email ) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( email );
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }

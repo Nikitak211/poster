@@ -19,12 +19,14 @@ async function login() {
     const emptyField = (value, inputToggle) => {
         if (value === "") {
             errorOn(inputToggle, "cannot be blank")
+            return false
         } else {
             successOn(inputToggle)
+            return true
         }
     }
-    emptyField(passwordValue, password)
-    emptyField(emailValue, email)
+    if (!emptyField(emailValue, email)) return;
+    if (!emptyField(passwordValue, password)) return;
 
     const response = await fetch('/api/auth/login', {
         method: 'POST', // or 'PUT'
@@ -34,17 +36,16 @@ async function login() {
         body: JSON.stringify(options)
     })
     const Data = await response.json()
-    
-    if ( Data.error) {
+
+    if (Data.error) {
         errorOn(email, Data.message)
         errorOn(password, Data.message)
     } else {
         successOn(email)
         successOn(password)
         window.location = "/";
-    } 
+    }
 }
-
 
 function errorOn(inputToggle, message) {
     const formControl = inputToggle.parentElement;
