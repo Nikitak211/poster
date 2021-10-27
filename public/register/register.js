@@ -26,10 +26,9 @@ async function checkUser() {
 		} else if (value.includes('@')) {
 			errorOn(inputToggle, "username cannot be email")
 			return false;
-		} else {
+		}
 			successOn(inputToggle)
 			return true;
-		}
 	}
 	if (!usernameValidation(usernameValue, username)) return
 
@@ -40,12 +39,11 @@ async function checkUser() {
 		} else if (value.length < 8) {
 			errorOn(inputToggle, "password must contain minimum of 8 charecters.")
 			return false;
-		} else {
+		}
 			successOn(inputToggle)
 			return true;
-		}
 	}
-	if (!passwordValidation(passwordValue, password)) return;
+	if (!passwordValidation(passwordValue, password)) return ;
 	if (!passwordValidation(validation_passwordValue, validation_password)) return;
 
 	const passwordMatch = (value, value2, inputToggle) => {

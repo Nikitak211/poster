@@ -20,10 +20,9 @@ async function login() {
         if (value === "") {
             errorOn(inputToggle, "cannot be blank")
             return false
-        } else {
+        }
             successOn(inputToggle)
             return true
-        }
     }
     if (!emptyField(emailValue, email)) return;
     if (!emptyField(passwordValue, password)) return;
