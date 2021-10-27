@@ -18,62 +18,59 @@ async function checkUser() {
 	const validation_passwordValue = validation_password.value.trim();
 	const emailValue = email.value.trim();
 	const validation_emailValue = validation_email.value.trim();
-	let success = [];
 
-	const usernameValidation = (value, input) => {
+	const usernameValidation = (value, inputToggle) => {
 		if (value === "") {
-			errorOn(input, "username cannot be blank")
+			errorOn(inputToggle, "username cannot be blank")
 		} else if (value.includes('@')) {
-			errorOn(input, "username cannot be email")
+			errorOn(inputToggle, "username cannot be email")
 		} else {
-			successOn(input)
-			success.push({ success: true })
+			successOn(inputToggle)
 		}
 	}
 	usernameValidation(usernameValue, username)
 
-	const passwordValidation = (value, value2, input) => {
+	const passwordValidation = (value, inputToggle) => {
 		if (value === "") {
-			errorOn(input, "password cannot be blank")
+			errorOn(inputToggle, "password cannot be blank")
 		} else if (value.length < 8) {
-			errorOn(input, "password must contain minimum of 8 charecters.")
+			errorOn(inputToggle, "password must contain minimum of 8 charecters.")
 		} else {
-			successOn(input)
-			success.push({ success: true })
+			successOn(inputToggle)
 		}
 	}
 	passwordValidation(passwordValue, validation_passwordValue, password)
 	passwordValidation(validation_passwordValue, passwordValue, validation_password)
 
-	const passwordMatch = (value, value2, input) => {
+	const passwordMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
-			errorOn(input, "password is not matching...")
+			errorOn(inputToggle, "password is not matching...")
+			return
 		}
+		
 	}
 	passwordMatch(validation_passwordValue, passwordValue, validation_password)
 
-	const emailValidation = (value, input) => {
+	const emailValidation = (value, inputToggle) => {
 		if (value === "") {
-			errorOn(input, "email cannot be blank")
+			errorOn(inputToggle, "email cannot be blank")
 		} else if (!isEmail(value)) {
-			errorOn(input, "need to enter email address")
+			errorOn(inputToggle, "need to enter email address")
 		} else {
-			successOn(input)
-			success.push({ success: true })
+			successOn(inputToggle)
 		}
 	}
 	emailValidation(emailValue, email)
 	emailValidation(validation_emailValue, validation_email)
 
-	const emailMatch = (value, value2, input) => {
+	const emailMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
-			errorOn(input, "email is not matching...")
+			errorOn(inputToggle, "email is not matching...")
 		}
 	}
 	emailMatch(emailValue, validation_emailValue, validation_email)
 
-	if (success[0] && success[1] && success[2] && success[3] && success[4]) {
-		
+	if (!errorOn) {
 		const options = {
 			author: usernameValue,
 			password: passwordValue,
@@ -99,15 +96,15 @@ async function checkUser() {
 	}
 }
 
-function errorOn( input, message ) {
-	const formControl = input.parentElement;
+function errorOn( inputToggle, message ) {
+	const formControl = inputToggle.parentElement;
 	const small = formControl.querySelector('small');
 	formControl.className = 'inputs error';
 	small.innerText = message;
 }
 
-function successOn( input ) {
-	const formControl = input.parentElement;
+function successOn( inputToggle ) {
+	const formControl = inputToggle.parentElement;
 	formControl.className = 'inputs success';
 }
 

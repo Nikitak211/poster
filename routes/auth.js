@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
     } catch (error) {
         res.send({
             error: true,
-            message: ["cannot complete registration", error]
+            message: ["cannot complete registration"]
         })
         console.error(error)
     }

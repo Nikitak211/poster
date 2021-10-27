@@ -16,19 +16,15 @@ async function login() {
         email: emailValue
     }
 
-    let success = [];
-
-    const emptyField = (value, input) => {
+    const emptyField = (value, inputToggle) => {
         if (value === "") {
-            errorOn(input, "cannot be blank")
-        } else {
-            success.push({ success: true })
+            errorOn(inputToggle, "cannot be blank")
         }
     }
     emptyField(passwordValue, password, "password")
     emptyField(emailValue, email, "email")
 
-    if (success[0] && success[1]) {
+    if (!errorOn) {
         const response = await fetch('/api/auth/login', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -49,14 +45,14 @@ async function login() {
     }
 }
 
-function errorOn(input, message) {
-    const formControl = input.parentElement;
+function errorOn(inputToggle, message) {
+    const formControl = inputToggle.parentElement;
     const small = formControl.querySelector('small');
     formControl.className = 'inputs error';
     small.innerText = message;
 }
 
-function successOn(input) {
-    const formControl = input.parentElement;
+function successOn(inputToggle) {
+    const formControl = inputToggle.parentElement;
     formControl.className = 'inputs success';
 }
