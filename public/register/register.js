@@ -36,8 +36,10 @@ async function checkUser() {
 	const passwordValidation = (value, inputToggle) => {
 		if (value === "") {
 			errorOn(inputToggle, "password cannot be blank")
+			return false;
 		} else if (value.length < 8) {
 			errorOn(inputToggle, "password must contain minimum of 8 charecters.")
+			return false;
 		} else {
 			successOn(inputToggle)
 			return true;
