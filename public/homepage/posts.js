@@ -7,7 +7,7 @@ const search = document.querySelector('[type="search"]');
 
 // create cards and update the UI
 function generatePost(post) {
-  const calendar = {  year: 'numeric', month: 'long',hour: 'numeric', minute: 'numeric' };
+  const calendar = {  year: 'numeric',day: 'numeric', month: 'long',hour: 'numeric', minute: 'numeric' };
   const returnPostDate = (date) =>
     `${date.toLocaleDateString("en-US",calendar)}`;
   const article = document.createElement('article');
