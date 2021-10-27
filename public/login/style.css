@@ -172,6 +172,7 @@ header img.logo {
     padding:10px;
 }
 input{
+    max-width:168px;
     border-radius: 5px;
     border: 2px solid hsl(var(--accent1));
 }
@@ -210,13 +211,13 @@ label{
     visibility: hidden;
 }
 small {
-    position:absolute;
+    font-size: 14px;
     display:flex;
     align-items: center;
     justify-content: center;
     margin:0 auto;
-    margin-top:-1em;
-    margin-left:10em;
+    width:fit-content;
+    text-align: left;
 }
 .inputs small {
     visibility: hidden;

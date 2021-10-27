@@ -19,31 +19,32 @@ async function login() {
     const emptyField = (value, inputToggle) => {
         if (value === "") {
             errorOn(inputToggle, "cannot be blank")
+        } else {
+            successOn(inputToggle)
         }
     }
-    emptyField(passwordValue, password, "password")
-    emptyField(emailValue, email, "email")
+    emptyField(passwordValue, password)
+    emptyField(emailValue, email)
 
-    if (!errorOn) {
-        const response = await fetch('/api/auth/login', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(options)
-        })
-        const Data = await response.json()
-        if (Data.success) {
-            successOn(email)
-            successOn(password)
-            window.location = "/";
-        }
-        else if (Data.error) {
-            errorOn(email, Data.message)
-            errorOn(password, Data.message)
-        }
-    }
+    const response = await fetch('/api/auth/login', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(options)
+    })
+    const Data = await response.json()
+    
+    if ( Data.error) {
+        errorOn(email, Data.message)
+        errorOn(password, Data.message)
+    } else {
+        successOn(email)
+        successOn(password)
+        window.location = "/";
+    } 
 }
+
 
 function errorOn(inputToggle, message) {
     const formControl = inputToggle.parentElement;
