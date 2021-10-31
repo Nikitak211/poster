@@ -5,6 +5,8 @@ const email = document.getElementById('email');
 const validation_email = document.getElementById('validation_email');
 const register_btn = document.getElementById('register_btn');
 
+document.getElementById('login-page').addEventListener('click', () => window.location = "/")
+
 document.getElementById("register_form").addEventListener('submit', (event) => {
 	event.preventDefault();
 	checkUser();
@@ -17,96 +19,101 @@ async function checkUser() {
 	const emailValue = email.value.trim();
 	const validation_emailValue = validation_email.value.trim();
 
-	let success = [];
-
-	const usernameValidation = (value,input) => {
-    	if (value === "") {
-			errorOn(input, "username cannot be blank")
-		} else if (value.includes('@')) {
-			errorOn(input, "username cannot be email")
-		} else {
-			successOn(input)
-			success.push({ success: true })
-		}
-    }
-	usernameValidation(usernameValue,username)
-	
-	const passwordValidation = (value,value2,input) => {
+	const usernameValidation = (value, inputToggle) => {
 		if (value === "") {
-			errorOn(input, "password cannot be blank")
+			errorOn(inputToggle, "username cannot be blank")
+			return false;
+		} else if (value.includes('@')) {
+			errorOn(inputToggle, "username cannot be email")
+			return false;
+		}
+			successOn(inputToggle)
+			return true;
+	}
+	if (!usernameValidation(usernameValue, username)) return
+
+	const passwordValidation = (value, inputToggle) => {
+		if (value === "") {
+			errorOn(inputToggle, "password cannot be blank")
+			return false;
 		} else if (value.length < 8) {
-			errorOn(input, "password must contain minimum of 8 charecters.")
-		} else {
-			successOn(input)
-		 	success.push({ success: true })
+			errorOn(inputToggle, "password must contain minimum of 8 charecters.")
+			return false;
 		}
+			successOn(inputToggle)
+			return true;
 	}
-	passwordValidation(passwordValue,validation_passwordValue,password)
-	passwordValidation(validation_passwordValue,passwordValue,validation_password)
+	if (!passwordValidation(passwordValue, password)) return ;
+	if (!passwordValidation(validation_passwordValue, validation_password)) return;
 
-	const passwordMatch = (value,value2,input) => {
+	const passwordMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
-			errorOn(input, "password is not matching...")
+			errorOn(inputToggle, "password is not matching...")
+			return false;
+		} else {
+			return true;
 		}
 	}
-	passwordMatch(validation_passwordValue,passwordValue,validation_password)
+	if (!passwordMatch(validation_passwordValue, passwordValue, validation_password)) return;
 
-	 const emailValidation = (value,input) => {
-		 if (value === "") {
-			errorOn(input, "email cannot be blank")
+	const emailValidation = (value, inputToggle) => {
+		if (value === "") {
+			errorOn(inputToggle, "email cannot be blank")
+			return false;
 		} else if (!isEmail(value)) {
-			errorOn(input, "need to enter email address")
+			errorOn(inputToggle, "need to enter email address")
+			return false;
 		} else {
-			successOn(input)
-			success.push({ success: true })
+			successOn(inputToggle)
+			return true;
 		}
 	}
-	emailValidation(emailValue,email)
-	emailValidation(validation_emailValue,validation_email)
+	if (!emailValidation(emailValue, email)) return;
+	if (!emailValidation(validation_emailValue, validation_email)) return;
 
-	const emailMatch = (value,value2,input) => {
+	const emailMatch = (value, value2, inputToggle) => {
 		if (value !== value2) {
-			errorOn(input, "email is not matching...")
+			errorOn(inputToggle, "email is not matching...")
+			return false;
+		} else {
+			return true;
 		}
 	}
-	emailMatch(emailValue,validation_emailValue,validation_email)
+	if (!emailMatch(emailValue, validation_emailValue, validation_email)) return;
 
-	if (success[0] && success[1] && success[2] && success[3] && success[4]) {
+	const options = {
+		author: usernameValue,
+		password: passwordValue,
+		email: emailValue,
+		date: new Date()
+	}
+	const response = await fetch('/api/auth/register', {
+		method: 'POST', // or 'PUT'
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(options),
+	})
+	const Data = await response.json()
 
-		const options = {
-			username: usernameValue,
-			password: passwordValue,
-			email: emailValue
-		}
-
-		const response = await fetch('/api/auth/register', {
-			method: 'POST', // or 'PUT'
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(options),
-		})
-		const Data = await response.json()
-
-		if(Data.error){
-			errorOn(email, Data.message)
-			errorOn(validation_email, Data.message)
-		}
-		if (Data.success) {
-			window.location = "/";
-		}
+	if (Data.error) {
+		errorOn(email, Data.message)
+		errorOn(validation_email, Data.message)
+	}
+	if (Data.success) {
+		window.location = "/";
 	}
 }
 
-function errorOn(input, message) {
-	const formControl = input.parentElement;
+function errorOn(inputToggle, message) {
+	const formControl = inputToggle.parentElement;
 	const small = formControl.querySelector('small');
 	formControl.className = 'inputs error';
 	small.innerText = message;
 }
 
-function successOn(input) {
-	const formControl = input.parentElement;
+function successOn(inputToggle) {
+	const formControl = inputToggle.parentElement;
 	formControl.className = 'inputs success';
 }
 
