@@ -75,7 +75,7 @@ ul img.post__author--avatar {
 [type="search"] {
     -webkit-appearance: none;
     background-color: hsl(var(--bkg));
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius--sm);
     font-size: var(--sm);
     box-shadow: var(--boxs-lg);
     -webkit-box-shadow: var(--boxs-lg);
